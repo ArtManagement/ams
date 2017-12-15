@@ -1,0 +1,91 @@
+<title><%= content_for?(:title) ? yield(:title) : "受託伝票" %></title>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+<p></p>
+      <div class="form-group row">
+        <%= f.label :id, "伝票No：", :class => "col-form-label col-lg-2 text-right text-warning" %>
+        <%= f.collection_select :id, @slip_no, :id, :slip_no, {:include_blank => true}, {:class => "form-control col-lg-3 select-no" } %>
+      </div>
+    </div>
+    <div class="col-lg-6">
+<p></p>
+      <div class="form-group row">
+        <%= f.label :date, "受託日：", :class => "col-form-label col-lg-3 text-right text-warning" %>
+        <%= f.text_field :date , :class => "form-control date-picker col-lg-3 text-center" %>
+        <%= f.label :staff_id, "担当者：", :class => "col-form-label col-lg-2 text-right text-warning" %>
+        <%= f.collection_select :staff_id, @staff, :id, :staff, {:include_blank => true}, {:class => 'form-control col-lg-4 select-id'} %>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group row">
+        <%= f.label :customer_id, "受託先：", :class => "col-form-label col-lg-2 text-right text-warning" %>
+        <%= f.collection_select :customer_id, @customer, :id, :customer, {:include_blank => true}, {:class => 'form-control col-lg-10 select-id'} %>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group row">
+        <%= f.label :scheduled_date, "返却予定日：", :class => "col-form-label col-lg-3 text-right text-warning" %>
+        <%= f.text_field :scheduled_date , :class => "form-control date-picker col-lg-3 text-center" %>
+        <%= f.label :tax_class_id, "消費税：", :class => "col-form-label col-lg-2 text-right text-warning" %>
+        <%= f.select :tax_class_id, [["税込","0"],["税別", "1"]], {}, {:class => "form-control col-lg-2 select-id"} %>
+        <%= f.text_field :tax_rate , :class => "form-control col-lg-2 text-center" %>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group row">
+        <%= f.label :note, "摘要：", :class => "col-form-label col-lg-2 text-right text-warning" %>
+        <%= f.text_area :note , :class => "form-control col-lg-10", rows:2 %>
+      </div>
+    </div>
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-4">
+      <div class="form-group row">
+        <table id = "trust_sum" class="table table-sm table-bordered">
+          <thead>
+            <tr class="table-warning">
+              <th class="text-warning">作品数</th>
+              <th class="text-warning">合計　　　</th>
+              <th class="text-warning">消費税　</th>
+              <th class="text-warning">税込合計　</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-right"></td>
+              <td class="text-right"></td>
+              <td class="text-right"></td>
+              <td class="text-right"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <table id = "trust_slip" ></table>
+    </div>
+    <div class="col-lg-4">
+<p></p>
+      <div class="form-group row">
+        <%= f.label :sort1, "並び替え：", :class => "col-form-label col-lg-3 text-right text-warning" %>
+        <%= f.collection_select :sort1, @sort, :sort_key, :sort, {:include_blank => true}, {:class => 'form-control col-lg-3 select-id'} %>
+        <%= f.collection_select :sort2, @sort, :sort_key, :sort, {:include_blank => true}, {:class => 'form-control col-lg-3 select-id'} %>
+        <%= f.collection_select :sort3, @sort, :sort_key, :sort, {:include_blank => true}, {:class => 'form-control col-lg-3 select-id'} %>
+      </div>
+    </div>
+    <div class="col-lg-1">
+    </div>
+    <div class="col-lg-7">
+<p></p>
+
+  <div class="btn-toolber">
+        <input class="btn btn-warning col-lg-2" id="trust_slip_new" type="button" value="新規伝票">
+        <%= f.submit "登録・更新", data: { disable_with: "登録中..." } ,:class => "btn btn-warning col-lg-2" %>
+        <input class="btn btn-warning col-lg-2" id="dtl" type="button" value="作品登録" onclick="window.open('/artworks/','作品詳細', 'height=600, width=1200');return false;">
+        <input class="btn btn-warning col-lg-2" id="pnt" type="button" value="印刷">
+        <input class="btn btn-warning col-lg-2" id="cls" type="button" value="閉じる" onClick="window.close()">
+  </div>
+
+  </div>
+</div>

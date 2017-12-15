@@ -1,0 +1,2 @@
+module SaleSlipsHelper
+end

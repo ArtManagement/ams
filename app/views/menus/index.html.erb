@@ -1,0 +1,67 @@
+<%= form_tag("/menus", method: "get") do %>
+  <title><%= content_for?(:title) ? yield(:title) : "販売管理" %></title>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+<p></p>
+        
+      </div>
+      <div class="col-lg-6">
+<p></p>
+        <div class="btn-toolber">
+          <input class="btn btn-danger col-lg-3" id="menu_purchase_slip" type="button" value="仕入伝票">
+          <input class="btn btn-danger col-lg-3" id="menu_purchase_cancel_slip" type="button" value="返品伝票">
+          <input class="btn btn-danger col-lg-3" id="menu_purchase_list" type="button" value="仕入台帳">
+        </div>
+      </div>
+      <div class="col-lg-6">
+<p></p>
+        <div class="btn-toolber">
+          <input class="btn btn-primary col-lg-3" id="menu_sale_slip" type="button" value="売上伝票">
+          <input class="btn btn-primary col-lg-3" id="menu_sale_cancel_slip" type="button" value="返品伝票">
+          <input class="btn btn-primary col-lg-3" id="menu_sale_list" type="button" value="売上台帳">
+        </div>
+      </div>
+      <div class="col-lg-6">
+<p></p>
+        <div class="btn-toolber">
+          <input class="btn btn-warning col-lg-3" id="menu_trust_slip" type="button" value="受託伝票">
+          <input class="btn btn-warning col-lg-3" id="menu_trust_return_slip" type="button" value="返却伝票">
+          <input class="btn btn-warning col-lg-3" id="menu_trust_list" type="button" value="受託台帳">
+        </div>
+      </div>
+      <div class="col-lg-6">
+<p></p>
+        <div class="btn-toolber">
+          <input class="btn btn-success col-lg-3" id="menu_consign_slip" type="button" value="委託伝票">
+          <input class="btn btn-success col-lg-3" id="menu_consign_return_slip" type="button" value="返却伝票">
+          <input class="btn btn-success col-lg-3" id="menu_consign_list" type="button" value="委託台帳">
+        </div>
+      </div>
+      <div class="col-lg-6">
+<p></p>
+        <div class="btn-toolber">
+          <input class="btn btn-danger col-lg-3" id="menu_purchase_slip" type="button" value="出金伝票">
+          <input class="btn btn-danger col-lg-3" id="menu_purchase_cancel_slip" type="button" value="出金台帳">
+          <input class="btn btn-danger col-lg-3" id="menu_purchase_list" type="button" value="買掛台帳">
+        </div>
+      </div>
+      <div class="col-lg-6">
+<p></p>
+        <div class="btn-toolber">
+          <input class="btn btn-primary col-lg-3" id="menu_purchase_slip" type="button" value="入金伝票">
+          <input class="btn btn-primary col-lg-3" id="menu_purchase_cancel_slip" type="button" value="入金台帳">
+          <input class="btn btn-primary col-lg-3" id="menu_purchase_list" type="button" value="売掛台帳">
+        </div>
+      </div>
+      <div class="col-lg-6">
+<p></p>
+        <div class="btn-toolber">
+          <input class="btn btn-default col-lg-3" id="menu_stock_list" type="button" value="在庫台帳">
+          <input class="btn btn-default col-lg-3" id="menu_inventry_list" type="button" value="棚卸台帳">
+          <input class="btn btn-default col-lg-3" id="menu_customer_list" type="button" value="顧客台帳">
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

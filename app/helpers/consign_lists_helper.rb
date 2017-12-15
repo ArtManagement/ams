@@ -1,0 +1,2 @@
+module ConsignListsHelper
+end

@@ -1,0 +1,2 @@
+class InventoryListsController < ApplicationController
+end

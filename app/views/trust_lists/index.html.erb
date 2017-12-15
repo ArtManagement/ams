@@ -1,0 +1,98 @@
+<%= form_tag("/trust_lists", method: "get") do %>
+  <title><%= content_for?(:title) ? yield(:title) : "受託台帳" %></title>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+<p></p>
+        <div class="form-group row">
+          <%= label_tag 'trust_lists[trust_date_from]','受託日：', :class => 'col-form-label col-lg-3 text-right text-warning' %>
+          <%= text_field_tag 'trust[trust_date_from]', '', :class => 'form-control date-picker text-center col-lg-4' %>
+          <%= label_tag 'trust_lists[trust_date_to]','〜', :class => 'col-form-label col-lg-1 text-warning' %>
+          <%= text_field_tag 'trust[trust_date_to]', '', :class => 'form-control date-picker text-center col-lg-4' %>
+        </div>
+      </div>
+      <div class="col-lg-6">
+<p></p>
+        <div class="form-group row">
+          <%= label_tag 'trust_lists[customer_id]','受託先：', :class => 'col-form-label col-lg-2 text-right text-warning' %>
+          <%= select_tag 'trust_lists[customer_id]', options_from_collection_for_select(@customer, :id, :customer), {:class => 'form-control col-lg-10 select-id', :include_blank => true} %>
+        </div>
+      </div>
+      <div class="col-lg-2">
+<p></p>
+        <div class="form-group row">
+          <%= label_tag 'trust_lists[status_id]','状況：', :class => 'col-form-label col-lg-6 text-right text-warning' %>
+          <%= select_tag 'trust_lists[status_id]', options_for_select([['', 0],['返却', 1],['仕入',2]]), {:class => 'form-control col-lg-6 select-id'} %>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="form-group row">
+          <%= label_tag 'trust_lists[artist_id]','作家：', :class => 'col-form-label col-lg-3 text-right text-warning' %>
+          <%= select_tag 'trust_lists[artist_id]', options_from_collection_for_select(@artist, :id, :artist), {:class => 'form-control col-lg-9 select-id', :include_blank => true} %>
+        </div>
+        <div class="form-group row">
+          <%= label_tag 'trust_lists[title]','タイトル：', :class => 'col-form-label col-lg-3 text-right text-warning' %>
+          <%= text_field_tag 'trust[title]', '', :class => 'form-control col-lg-9' %>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="form-group row">
+          <%= label_tag 'trust_lists[category]','分類技法：', :class => 'col-form-label col-lg-3 text-right text-warning' %>
+          <%= select_tag 'trust_lists[category]', options_from_collection_for_select(@category, :id, :category), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
+          <%= select_tag 'trust_lists[technique]', options_from_collection_for_select(@technique, :id, :technique), {:class => 'form-control col-lg-5 select-id', :include_blank => true} %>
+        </div>
+        <div class="form-group row">
+          <%= label_tag 'trust_lists[format]','体裁：', :class => 'col-form-label col-lg-3 text-right text-warning' %>
+          <%= select_tag 'trust_lists[format]', options_from_collection_for_select(@format, :id, :format), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
+        </div>
+      </div>
+      <div class="col-lg-4">
+
+        <div class="form-group row">
+          <table id = "trust_list_sum" class="table table-sm table-bordered">
+            <thead>
+              <tr class="table-warning">
+                <th class="text-warning">作品数</th>
+                <th class="text-warning">合計　　　</th>
+                <th class="text-warning">消費税　</th>
+                <th class="text-warning">税込合計　</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-right"></td>
+                <td class="text-right"></td>
+                <td class="text-right"></td>
+                <td class="text-right"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <table id="trust_list"></table>
+      </div>
+      <div class="col-lg-4">
+<p></P>
+        <div class="form-group row">
+          <%= label_tag 'trust_lists[sort1]','並び替え：', :class => 'col-form-label col-lg-3 text-right text-warning' %>
+          <%= select_tag 'trust_lists[sort1]', options_from_collection_for_select(@sort, :sort_key, :sort), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
+          <%= select_tag 'trust_lists[sort2]', options_from_collection_for_select(@sort, :sort_key, :sort), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
+          <%= select_tag 'trust_lists[sort3]', options_from_collection_for_select(@sort, :sort_key, :sort), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
+        </div>
+      </div>
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-7">
+<p></P>
+        <div class="btn-toolber">
+          <input class="btn btn-warning col-lg-2" id="trust_list_seach" type="button" value="検索条件">
+          <input class="btn btn-warning col-lg-2" id="trust_list_slip" type="button" value="伝票修正">
+          <input class="btn btn-warning col-lg-2" id="trust_list_artwork" type="button" value="作品詳細">
+          <input class="btn btn-warning col-lg-2" id="purcahse_list_print" type="button" value="印刷">
+          <input class="btn btn-warning col-lg-2" id="trust_list_close" type="button" value="閉じる" onClick="window.close()">
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
