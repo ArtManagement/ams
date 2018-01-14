@@ -11,10 +11,11 @@
 # about supported directives.
 #
 #= require jquery
-#= require jquery_ujs
-#= require jquery-1.11.0
+#= require jquery-ui
 #= require turbolinks
 #= require tether
+#= require jquery3
+#= require popper
 #= require bootstrap-sprockets
 #= require moment
 #= require bootstrap-datetimepicker
@@ -22,8 +23,8 @@
 #= require select2
 #= require select2_locale_"ja"
 #= require autonumeric
-#= require jquery-jqGrid
-#= require grid-locale-ja
+#= require trirand/src/jquery.jqGrid
+#= require trirand/i18n/grid.locale-ja
 #= require_tree .
 
 $ ->

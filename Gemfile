@@ -23,7 +23,8 @@ gem 'baby_squeel'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 # Use Bootstrap4
-gem 'bootstrap', '~> 4.0.0.alpha4'
+gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
+# gem 'bootstrap', '~> 4.0.0.alpha4
 gem 'font-awesome-sass'
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'

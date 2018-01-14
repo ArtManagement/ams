@@ -59,3 +59,6 @@
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
+
+server '00.00.000.000', user: 'artnet', roles: %w{app} #serverのipとuser名は適宜
+set :ssh_options, keys: '~/.ssh/ams_aws' #ssh_keyの名前は適宜

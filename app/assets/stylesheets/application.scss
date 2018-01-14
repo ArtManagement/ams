@@ -15,9 +15,8 @@
  */
  $font-size-base: .875rem !default;
  @import "bootstrap";
- @import "jqgrid-bootstrap";
- @import "ui.jqgrid-bootstrap";
- @import "ui.jqgrid-bootstrap-ui";
+ @import "jquery-ui";
+ @import "trirand/ui.jqgrid-bootstrap4";
  @import "font-awesome-sprockets";
  @import "font-awesome";
  @import "bootstrap-datetimepicker";
