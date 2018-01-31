@@ -5,10 +5,17 @@ $ ->
 
 # 新規ボタン
   $('#purchase_new').click ->
-    location.href = '/purchases/new?slip_id=' + $("#purchase_purchase_slip_id").val()
+    param = location.search
+    location.href = '/purchases/new' + param
+    param.slice(1) + ''
 
 # 仕入No変更
   $('#purchase_id').on ->
     alert 'on'
   $('#purchase_id').change ->
-    location.href = '/purchases/' + $('#purchase_id').val()
+    param = location.search
+    location.href = '/purchases/' + $('#purchase_id').val() + param
+
+# 画像ボタン
+  $('#purchase_image').click ->
+    window.open('/images/','', 'height=560, width=1200')

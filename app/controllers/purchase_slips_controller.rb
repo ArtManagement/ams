@@ -2,8 +2,8 @@ class PurchaseSlipsController < ApplicationController
   def index
     @purchase_slip = PurchaseSlip.new
     @slip_no = PurchaseSlip.select(:id,:slip_no).order(slip_no: :desc).all
-    @staff = Staff.select(:id, :staff).where("company_id = 0").order(:staff_no)
-    @customer = Customer.select(:id, "name || '／' || kana AS customer").where("company_id = 0").order(:kana)
+    @staff = Staff.select(:id, :staff).where.order(:staff_no)
+    @customer = Customer.select(:id, "name || '／' || kana AS customer").order(:kana)
     @purchase_slip.date = Date.current
     @purchase_slip.slip_class_id = 0
     @purchase_slip.tax_class_id = 0
@@ -16,30 +16,46 @@ class PurchaseSlipsController < ApplicationController
     id = params[:id]
     @purchase_slip = PurchaseSlip.find(params[:id])
     @slip_no = PurchaseSlip.select(:id,:slip_no).order(slip_no: :desc).all
-    @customer = Customer.select(:id, "name || '／' || kana AS customer").where("company_id = 0").order(:kana)
-    @staff = Staff.select(:id, :staff).where("company_id = 0").order(:staff_no)
+    @customer = Customer.select(:id, "name || '／' || kana AS customer").order(:kana)
+    @staff = Staff.select(:id, :staff).order(:staff_no)
     @sort = Sort.select(:sort_key, :sort).all
-    gon.purchase_artwork_id = Artwork.includes({purchases: :purchase_slip},:purchases,:artist,:category,:size).order(:id).where(purchases: {id: nil})
+    gon.purchase_artwork_id = Artwork.includes({purchases: :purchase_slip},:artist,:category,:size).order(:artwork_no).where(purchases: {id: nil})
                                      .pluck(:id, "artwork_no || '　　' || name || '／' || title || '／' || category AS artwork_no")
     gon.purchase_data = Purchase.includes({artwork: [:artist, :category, :size, :size_unit, :format]})
                                 .where(purchase_slip_id: params[:id])
                                 .pluck_to_hash(:id, :artwork_id, :artwork_no, :name, :title, :category, "sizes.size", :size_unit, :format, :price,
                                                :retail_price, :wholesale_price, :note)
-    render action: :edit
+    respond_to do |format|
+      format.html # show.html.erb
+      format.pdf do
+
+    # order情報を設定したThinReportを作成する
+       report = PurchaseSlipPDF.create @purchase_slip
+
+       # ブラウザでPDFを表示する
+       # disposition: "inline" によりダウンロードではなく表示させている
+         send_data report.generate,
+           filename:    "#{@purchase_slip.id}.pdf",
+           type:        "application/pdf",
+           disposition: "inline"
+        end
+    end
+#    redirect_to @purchase_slip
+    render action: :edit and return
+
   end
 
   def new
     @purchase_slip = PurchaseSlip.new
     @slip_no = PurchaseSlip.select(:id,:slip_no).order(slip_no: :desc).all
     @staff = Staff.select(:id, :staff).where("company_id = 0").order(:staff_no)
-    @customer = Customer.select("id, name || '／' || kana AS customer").where("company_id = 0").order(:kana)
+    @customer = Customer.select("id, name || '／' || kana AS customer").order(:kana)
     @sort = Sort.select(:sort_key, :sort).all
     @purchase_slip.date = Date.current
     @purchase_slip.slip_class_id = 0
     @purchase_slip.tax_class_id = 0
     @purchase_slip.tax_rate = 0.08
-        gon.purchase_artwork_id = Artwork.includes({purchases: :purchase_slip},:purchases,:artist,:category,:size).order(:id).where(purchases: {id: nil})
-                                     .pluck(:id, "artwork_no || '　　' || name || '／' || title AS artwork_no")
+    gon.purchase_artwork_id = []
   end
 
   def create

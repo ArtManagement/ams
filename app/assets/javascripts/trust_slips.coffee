@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 trust_data = gon.trust_data
 trust_artwork_id = gon.trust_artwork_id
+
 $ ->
   $('#trust_slip').jqGrid
     styleUI: 'Bootstrap'
@@ -10,14 +11,14 @@ $ ->
     data: trust_data
     editurl: 'clientArray'
     colNames: [ '', '作品No', '作家名', 'タイトル', 'ＥＤ・号数', '分類・技法', '体裁', '状況', '受託価格', '上代', '下代', '', '備考', 'id', '作品ID']
-    colModel: [ { name:'actions', width: 40, formatter: "actions", formatoptions: {keys: true, delbutton : true, delOptions: {}}}
+    colModel: [ { name:'actions', width: 40, formatter: "actions", formatoptions: {keys: false,editbutton: false, delbutton: true, delOptions: {}}}
                 { name:'artwork_no', width: 100, editable: true, sortable: false, edittype: "select",
-                editoptions: { value: trust_artwork_id , dataInit: (artwork_id) -> $(artwork_id).select2 theme: "bootstrap", dropdownAutoWidth: true,  width: "1120px" } }
-                { name:'name', width: 160, sortable: false }
-                { name:'title', width: 240, sortable: false }
-                { name:'size', width: 120, sortable: false }
+                editoptions: { value: trust_artwork_id , dataInit: (artwork_id) -> $(artwork_id).select2 theme: "bootstrap", dropdownAutoWidth: true,  width: "1080px" } }
+                { name:'name', width: 180, sortable: false }
+                { name:'title', width: 260, sortable: false }
+                { name:'size', width: 100, sortable: false }
                 { name:'category', width: 160, sortable: false }
-                { name:'format', width: 100, sortable: false }
+                { name:'format', width: 80, sortable: false }
                 { name:'status', width: 80, sortable: false }
                 { name:'price', width: 120, editable: true, sortable: false, align : 'right', formatter: 'number', summaryType: 'sum',
                 formatoptions: { decimalSeparator: ".",thousandsSeparator: ",", decimalPlaces: 0, defaultValue: '' } }
@@ -86,10 +87,22 @@ $ ->
     viewrecords: true
     sortorder: 'asc'
     caption:''
+#    pager: '#trust_slip_pager'
 
+#  $('#trust_slip').navGrid '#trust_slip_pager',{ edit: false, add: false, del: true, search: false, refresh: false, view: false, position: "left", cloneToTop: false }
 # 新規伝票ボタン
   $('#trust_slip_new').click ->
     location.href = '/trust_slips/new'
+
+# 作品登録ボタン
+  $('#trust_slip_artwork').click ->
+    if $("#trust_slip_id").val()
+      id = $("#trust_slip").jqGrid('getGridParam','selrow')
+      ret = $("#trust_slip").jqGrid('getRowData',id)
+      if ret.id
+        window.open('/trusts/' + ret.id,'', 'height=560, width=1200')
+      else
+        window.open('/trusts/new?' + $("#trust_slip_id").val(),'', 'height=560, width=1200')
 
 # 伝票No変更
   $('#trust_slip_id').change ->

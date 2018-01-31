@@ -47,6 +47,9 @@ gem 'gon'
 gem 'pluck_to_hash'
 # Use thinreports
 gem 'thinreports', '~> 0.10.0'
+# Use carrierwave
+gem 'carrierwave'
+gem 'rmagick'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

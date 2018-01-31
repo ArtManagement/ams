@@ -1,6 +1,7 @@
 <title><%= content_for?(:title) ? yield(:title) : "仕入登録" %></title>
 <div class="container">
   <div class="row">
+    <%= f.fields_for @artwork do |a| %>
     <div class="col-lg-6">
 <p></p>
       <div class="form-group row">
@@ -9,13 +10,6 @@
         <%= f.label :purchase_slip_id, '伝票No:', :class => "col-form-label col-lg-2 text-danger text-right" %>
         <%= f.text_field :purchase_slip_id, :class => 'form-control col-lg-3' %>
       </div>
-    </div>
-    <div class="col-lg-6">
-    </div>
-  </div>
-  <div class="row">
-    <%= f.fields_for @artwork do |a| %>
-    <div class="col-lg-6">
       <div class="form-group row">
         <%= a.label :artist_id, "作家：", :class => "col-form-label col-lg-3 text-danger text-right" %>
         <%= a.collection_select :artist_id, @artist, :id, :artist, {:include_blank => true},{:class => 'form-control col-lg-8 select-id'} %>
@@ -47,8 +41,8 @@
       </div>
       <div class="form-group row">
         <%= a.label :production_year, "製作年：", :class => "col-form-label col-lg-3 text-danger text-right" %>
-        <%= a.text_field :production_year, :class => "form-control col-lg-2 text-right" %>
-        <%= a.label :raisonne, "レゾネ：", :class => "col-form-label col-lg-3 text-danger text-right" %>
+        <%= a.text_field :production_year, :class => "form-control col-lg-3 text-right" %>
+        <%= a.label :raisonne, "レゾネ：", :class => "col-form-label col-lg-2 text-danger text-right" %>
         <%= a.text_field :raisonne, :class => "form-control col-lg-3" %>
       </div>
       <div class="form-group row">
@@ -59,6 +53,7 @@
       </div>
     </div>
     <div class="col-lg-6">
+<p></p>
       <div class="form-group row">
         <%= a.label :size_title, "　　　　　　　　　　　　高さ　　　　　幅　　　　　奥行　　　　　単位", :class => "col-form-label col-lg-12 text-danger" %>
         <%= a.label :heiｇｈｔ, "画面サイズ：", :class => "col-form-label col-lg-3 text-danger text-right" %>
@@ -109,15 +104,13 @@
     <% end %>
   </div>
   <div class="row">
-    <div class="col-lg-5">
-    </div>
     <div class="col-lg-7">
-      <div class="toolbar">
-        <input class="btn btn-danger col-lg-2" id="purchase_new" type="button" value="新規入力">
-        <%= f.submit "登録・更新", data: { disable_with: "登録中..." } ,:class => "btn btn-danger col-lg-2" %>
-        <input class="btn btn-danger col-lg-2" id="purchase_image" type="button" value="画像">
-        <input class="btn btn-danger col-lg-2" id="purchase_close" type="button" value="閉じる" onClick="window.close()">
-      </div>
+    </div>
+    <div class="col-lg-5">
+      <input class="btn btn-danger" id="purchase_new" type="button" value="　新規入力　">
+      <%= f.submit "　登録更新　", data: { disable_with: "登録中..." } ,:class => "btn btn-danger" %>
+      <input class="btn btn-danger" id="purchase_image" type="button" value="　画　像　">
+      <input class="btn btn-danger" id="purchase_close" type="button" value="　閉じる　" onClick="window.close()">
     </div>
   </div>
 </div>

@@ -9,21 +9,22 @@ $ ->
     datatype: 'local'
     data: consign_return_data
     editurl: 'clientArray'
-    colNames: [ '', '作品No', '作家名', 'タイトル', 'ＥＤ・号数', '分類・技法', '体裁', '状況', '委託価格', '備考', 'id', '委託ID']
+    colNames: [ '', '作品No', '作家名', 'タイトル', 'ＥＤ・号数', '分類・技法', '体裁', '状況', '委託価格', '備考', 'id', '委託ID','作品ID']
     colModel: [ { name:'actions', width: 40, formatter: "actions", formatoptions: {keys: true, delbutton : true, delOptions: {}}}
                 { name:'artwork_no', width: 100, editable: true, sortable: false, edittype: "select",
-                editoptions: { value: consign_return_artwork_id , dataInit: (artwork_id) -> $(artwork_id).select2 theme: "bootstrap", dropdownAutoWidth: true,  width: "1120px" } }
-                { name:'name', width: 160, sortable: false }
-                { name:'title', width: 240, sortable: false }
-                { name:'size', width: 120, sortable: false }
+                editoptions: { value: consign_return_artwork_id , dataInit: (artwork_id) -> $(artwork_id).select2 theme: "bootstrap", dropdownAutoWidth: true,  width: "1080px" } }
+                { name:'name', width: 180, sortable: false }
+                { name:'title', width: 260, sortable: false }
+                { name:'size', width: 100, sortable: false }
                 { name:'category', width: 160, sortable: false }
-                { name:'format', width: 100, sortable: false }
                 { name:'format', width: 80, sortable: false }
-                { name:'price', width: 120, editable: true, sortable: false, align : 'right', formatter: 'number', summaryType: 'sum',
+                { name:'status', width: 80, sortable: false }
+                { name:'price', width: 120, sortable: false, align : 'right', formatter: 'number', summaryType: 'sum',
                 formatoptions: { decimalSeparator: ".",thousandsSeparator: ",", decimalPlaces: 0, defaultValue: '' } }
                 { name:'note', width: 200, sortable: false, editable: true, edittype: "textarea"}
                 { name:'id', width: 0,hidden : true }
-                { name:'consign_id', width: 0,hidden : true } ]
+                { name:'consign_id', width: 0,hidden : true }
+                { name:'artwork_id', width: 0,hidden : true } ]
     afterSaveCell: ( rowid, cellname, value, iRow, iCol ) ->
       if cellname == 'artwork_no'
         ret = $("#consign_return_slip").jqGrid('getRowData',rowid)
@@ -68,6 +69,14 @@ $ ->
 # 新規伝票ボタン
   $('#consign_return_slip_new').click ->
     location.href = '/consign_return_slips/new'
+
+# 作品登録ボタン
+  $('#consign_return_slip_artwork').click ->
+    if $("#consign_return_slip_id").val()
+      id = $("#consign_return_slip").jqGrid('getGridParam','selrow')
+      ret = $("#consign_return_slip").jqGrid('getRowData',id)
+      if ret.artwork_id
+        window.open('/artworks/' + ret.artwork_id,'', 'height=560, width=1200')
 
 # 伝票No変更
   $('#consign_return_slip_id').change ->

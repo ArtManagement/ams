@@ -1,0 +1,2 @@
+class ExhibitSlip < ApplicationRecord
+end

@@ -10,14 +10,14 @@ $ ->
     data: purchase_data
     editurl: 'clientArray'
     colNames: [ '', '作品No', '作家名', 'タイトル', 'ＥＤ・号数', '分類・技法', '体裁', '状況', '仕入価格', '上代', '下代', '', '備考', 'id', '作品ID']
-    colModel: [ { name:'actions', width: 40, formatter: "actions", formatoptions: {keys: true, delbutton : true, delOptions: {}}}
+    colModel: [ { name:'actions', width: 40, formatter: "actions", formatoptions: {keys: false,editbutton: false, delbutton: true, delOptions: {}}}
                 { name:'artwork_no', width: 100, editable: true, sortable: false, edittype: "select",
-                editoptions: { value: purchase_artwork_id , dataInit: (artwork_id) -> $(artwork_id).select2 theme: "bootstrap", dropdownAutoWidth: true,  width: "1120px" } }
-                { name:'name', width: 160, sortable: false }
-                { name:'title', width: 240, sortable: false }
-                { name:'size', width: 120, sortable: false }
+                editoptions: { value: purchase_artwork_id , dataInit: (artwork_id) -> $(artwork_id).select2 theme: "bootstrap", dropdownAutoWidth: true,  width: "1080px" } }
+                { name:'name', width: 180, sortable: false }
+                { name:'title', width: 260, sortable: false }
+                { name:'size', width: 100, sortable: false }
                 { name:'category', width: 160, sortable: false }
-                { name:'format', width: 100, sortable: false }
+                { name:'format', width: 80, sortable: false }
                 { name:'status', width: 80, sortable: false }
                 { name:'price', width: 120, editable: true, sortable: false, align : 'right', formatter: 'number', summaryType: 'sum',
                 formatoptions: { decimalSeparator: ".",thousandsSeparator: ",", decimalPlaces: 0, defaultValue: '' } }
@@ -86,7 +86,9 @@ $ ->
     viewrecords: true
     sortorder: 'asc'
     caption:''
+#    pager: '#purchase_slip_pager'
 
+#  $('#purchase_slip').navGrid '#purchase_slip_pager',{ edit: false, add: false, del: true, search: false, refresh: false, view: false, position: "left", cloneToTop: false }
 # 新規伝票ボタン
   $('#purchase_slip_new').click ->
     location.href = '/purchase_slips/new'
@@ -97,9 +99,9 @@ $ ->
       id = $("#purchase_slip").jqGrid('getGridParam','selrow')
       ret = $("#purchase_slip").jqGrid('getRowData',id)
       if ret.id
-        window.open('/purchases/' + ret.id,'', 'height=600, width=1200')
+        window.open('/purchases/' + ret.id,'', 'height=560, width=1200')
       else
-        window.open('/purchases/new?slip_id=' + $("#purchase_slip_id").val(),'', 'height=600, width=1200')
+        window.open('/purchases/new?' + $("#purchase_slip_id").val(),'', 'height=560, width=1200')
 
 # 伝票No変更
   $('#purchase_slip_id').change ->

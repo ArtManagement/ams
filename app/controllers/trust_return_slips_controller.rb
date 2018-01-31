@@ -6,8 +6,7 @@ class TrustReturnSlipsController < ApplicationController
     @customer = Customer.select(:id, "name || '／' || kana AS customer").where("company_id = 0").order(:kana)
     @trust_return_slip.date = Date.current
     @sort = Sort.select(:sort_key, :sort).all
-    gon.trust_return_artwork_id = Trust.includes({artwork: [:artist, :category, :technique, :size, :size_unit, :format]},:trust_returns).order(:id)
-                                             .where(trust_returns: {id: nil}).pluck(:id, "artwork_no || '　　' || name || '／' || title AS artwork_no")
+    gon.trust_return_artwork_id = []
   end
 
   def show
@@ -34,8 +33,7 @@ class TrustReturnSlipsController < ApplicationController
     @customer = Customer.select("id, name || '／' || kana AS customer").where("company_id = 0").order(:kana)
     @sort = Sort.select(:sort_key, :sort).all
     @trust_return_slip.date = Date.current
-    gon.trust_return_artwork_id = Trust.includes({artwork: [:artist, :category, :technique, :size, :size_unit, :format]},:trust_returns).order(:id)
-                                             .where(trust_returns: {id: nil}).pluck(:id, "artwork_no || '　　' || name || '／' || title AS artwork_no")
+    gon.trust_return_artwork_id = []
   end
 
   def create

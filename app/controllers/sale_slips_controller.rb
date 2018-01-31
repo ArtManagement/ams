@@ -1,44 +1,45 @@
 class SaleSlipsController < ApplicationController
+
   def index
     @sale_slip = SaleSlip.new
     @slip_no = SaleSlip.select(:id,:slip_no).order(slip_no: :desc).all
-    @staff = Staff.select(:id, :staff).where("company_id = 0").order(:staff_no)
-    @customer = Customer.select(:id, "name || '／' || kana AS customer").where("company_id = 0").order(:kana)
+    @staff = Staff.select(:id, :staff).where.order(:staff_no)
+    @customer = Customer.select(:id, "name || '／' || kana AS customer").order(:kana)
     @sale_slip.date = Date.current
     @sale_slip.tax_class_id = 0
     @sale_slip.tax_rate = 0.08
     @sort = Sort.select(:sort_key, :sort).all
-    gon.sale_artwork_id = Artwork.includes({sales: :sale_slip},:artist,:category,:size).order(:id).where(sales: {id: nil})
-                                     .pluck(:id, "artwork_no || '　　' || name || '／' || title AS artwork_no")
+    gon.sale_artwork_id = []
   end
 
   def show
     id = params[:id]
     @sale_slip = SaleSlip.find(params[:id])
     @slip_no = SaleSlip.select(:id,:slip_no).order(slip_no: :desc).all
-    @customer = Customer.select(:id, "name || '／' || kana AS customer").where("company_id = 0").order(:kana)
-    @staff = Staff.select(:id, :staff).where("company_id = 0").order(:staff_no)
+    @customer = Customer.select(:id, "name || '／' || kana AS customer").order(:kana)
+    @staff = Staff.select(:id, :staff).order(:staff_no)
     @sort = Sort.select(:sort_key, :sort).all
-    gon.sale_artwork_id = Artwork.includes({sales: :sale_slip}, :artist, :category, :size).order(:id).where(sales: {id: nil})
+    gon.sale_artwork_id = Artwork.includes({sales: :sale_slip},:artist,:category,:size).order(:artwork_no).where(sales: {id: nil})
                                      .pluck(:id, "artwork_no || '　　' || name || '／' || title || '／' || category AS artwork_no")
     gon.sale_data = Sale.includes({artwork: [:artist, :category, :size, :size_unit, :format]})
                                 .where(sale_slip_id: params[:id])
                                 .pluck_to_hash(:id, :artwork_id, :artwork_no, :name, :title, :category, "sizes.size", :size_unit, :format, :price,
                                                :retail_price, :wholesale_price, :note)
-    render action: :edit
+
+    render action: :edit and return
+
   end
 
   def new
     @sale_slip = SaleSlip.new
     @slip_no = SaleSlip.select(:id,:slip_no).order(slip_no: :desc).all
     @staff = Staff.select(:id, :staff).where("company_id = 0").order(:staff_no)
-    @customer = Customer.select("id, name || '／' || kana AS customer").where("company_id = 0").order(:kana)
+    @customer = Customer.select("id, name || '／' || kana AS customer").order(:kana)
     @sort = Sort.select(:sort_key, :sort).all
     @sale_slip.date = Date.current
     @sale_slip.tax_class_id = 0
     @sale_slip.tax_rate = 0.08
-        gon.sale_artwork_id = Artwork.includes({sales: :sale_slip},:artist, :category, :size).order(:id).where(sales: {id: nil})
-                                     .pluck(:id, "artwork_no || '　　' || name || '／' || title AS artwork_no")
+    gon.sale_artwork_id = []
   end
 
   def create

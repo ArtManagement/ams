@@ -1,18 +1,10 @@
 class PurchasesController < ApplicationController
   def index
-    @purchase = Purchase.new
-    @artwork = Artwork.new
-    @artwork_no = Purchase.joins(:artwork).select(:id,"artworks.artwork_no")
-    @artist = Artist.select(:id, "name || '／' || kana AS artist").order(:kana).all
-    @category = Category.select(:id, :category).order(:id).all
-    @technique = Technique.select(:id, :technique).order(:id).all
-    @size = Size.select(:id, :size).order(:id).all
-    @size_unit = SizeUnit.select(:id, :size_unit).order(:id).all
-    @format = Format.select(:id, :format).order(:id).all
-    @motif = Motif.select(:id, :motif).order(:id).all
+    render action: :new
   end
 
   def show
+    id = params[:id]
     @purchase = Purchase.find(params[:id])
     @artwork = Artwork.find(@purchase.artwork_id)
     @artwork_no = Purchase.joins(:artwork).select(:id,"artworks.artwork_no")
@@ -41,8 +33,8 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    @purchase = Purchase.new(purchase_params)
     @artwork = Artwork.new(artwork_params)
+    @purchase = Purchase.new(purchase_params)
     @purchase_slip = PurchaseSlip.find_by(slip_no: 'S17-0001')
     c = Counter.find_by(year: @purchase_slip.date.year,company_id: 1)
     @artwork.artwork_no = @purchase_slip.date.to_s[2,2] + "-" + sprintf("%05d",c.artwork)
@@ -50,8 +42,9 @@ class PurchasesController < ApplicationController
       c.artwork = c.artwork + 1
       c.save
       @purchase.artwork_id = @artwork.id
+      @purchase.purchase_slip_id = 'S17-0001'
       if @purchase.save
-
+        redirect_to @purchase
       else
         render 'new'
       end
@@ -76,13 +69,14 @@ class PurchasesController < ApplicationController
     end
   end
 
-
   private
 
-  def artwork_params
-    params.require(:purchase).permit(artworks_attributes:[:artist_id,:title,:category_id])
-  end
   def purchase_params
-    params.require(:purchase).permit(:purchse_slip_no,:price)
+    params.require(:purchase).permit(:price)
   end
+
+  def artwork_params
+    params.require(:artwork).permit(:artist_id,:title)
+  end
+
 end

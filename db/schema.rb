@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171215131618) do
+ActiveRecord::Schema.define(version: 20180131162720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20171215131618) do
     t.string   "edition"
     t.integer  "edition_no"
     t.integer  "edition_limit"
-    t.integer  "production_year"
+    t.string   "production_year"
     t.string   "raisonne"
     t.integer  "motif_id"
     t.integer  "format_id"
@@ -86,6 +86,10 @@ ActiveRecord::Schema.define(version: 20171215131618) do
     t.integer  "reference_price"
     t.text     "condition"
     t.text     "note"
+    t.string   "image1"
+    t.string   "image2"
+    t.string   "image3"
+    t.string   "image4"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
@@ -223,11 +227,58 @@ ActiveRecord::Schema.define(version: 20171215131618) do
     t.datetime "updated_at",        null: false
   end
 
+  create_table "exhibit_slips", force: :cascade do |t|
+    t.string   "slip_no"
+    t.datetime "date"
+    t.integer  "customer_id"
+    t.datetime "scheduled_date"
+    t.string   "event"
+    t.integer  "tax_class_id"
+    t.float    "tax_rate"
+    t.integer  "staff_id"
+    t.text     "note"
+    t.integer  "company_id"
+    t.integer  "user_id"
+    t.string   "sort1"
+    t.string   "sort2"
+    t.string   "sort3"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "exhibits", force: :cascade do |t|
+    t.integer  "exhibit_slip_id"
+    t.integer  "artwork_id"
+    t.integer  "price"
+    t.text     "note"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "formats", force: :cascade do |t|
     t.string  "format"
     t.string  "format_eng"
     t.integer "sort"
     t.boolean "usable"
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.integer  "artist_id"
+    t.string   "title"
+    t.integer  "category_id"
+    t.integer  "technique_id"
+    t.string   "technique_etc"
+    t.integer  "size_id"
+    t.integer  "size_unit_id"
+    t.string   "size_etc"
+    t.string   "image1"
+    t.string   "image2"
+    t.string   "image3"
+    t.string   "image4"
+    t.string   "image5"
+    t.string   "image6"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "motifs", force: :cascade do |t|
@@ -242,6 +293,30 @@ ActiveRecord::Schema.define(version: 20171215131618) do
     t.string  "nationality_eng"
     t.integer "sort"
     t.boolean "usable"
+  end
+
+  create_table "payment_slips", force: :cascade do |t|
+    t.string   "slip_no"
+    t.datetime "date"
+    t.integer  "customer_id"
+    t.integer  "staff_id"
+    t.text     "note"
+    t.integer  "company_id"
+    t.integer  "user_id"
+    t.string   "sort1"
+    t.string   "sort2"
+    t.string   "sort3"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "payment_slip_id"
+    t.integer  "purchase_id"
+    t.integer  "amount"
+    t.text     "note"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "prefectures", force: :cascade do |t|
@@ -300,6 +375,30 @@ ActiveRecord::Schema.define(version: 20171215131618) do
     t.text     "note"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+  end
+
+  create_table "receipt_slips", force: :cascade do |t|
+    t.string   "slip_no"
+    t.datetime "date"
+    t.integer  "customer_id"
+    t.integer  "staff_id"
+    t.text     "note"
+    t.integer  "company_id"
+    t.integer  "user_id"
+    t.string   "sort1"
+    t.string   "sort2"
+    t.string   "sort3"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "receipts", force: :cascade do |t|
+    t.integer  "receipt_slip_id"
+    t.integer  "sale_id"
+    t.integer  "amount"
+    t.text     "note"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "sale_cancel_slips", force: :cascade do |t|

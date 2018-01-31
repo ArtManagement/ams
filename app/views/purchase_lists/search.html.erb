@@ -1,0 +1,10 @@
+<div class='modal viewer'>
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class='modal-body'>
+        <%= label_tag 'purchase_lists[artist_id_1]','作家：', :class => 'col-form-label col-lg-3 text-right text-danger' %>
+        <%= select_tag 'purchase_lists[artist_id_1]', options_from_collection_for_select(@artist, :id, :artist), {:class => 'form-control col-lg-9 select-id', :include_blank => true} %>
+      </div>
+    </div>
+  </div>
+</div>

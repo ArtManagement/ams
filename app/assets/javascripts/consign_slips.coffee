@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 consign_data = gon.consign_data
 consign_artwork_id = gon.consign_artwork_id
+
 $ ->
   $('#consign_slip').jqGrid
     styleUI: 'Bootstrap'
@@ -10,14 +11,14 @@ $ ->
     data: consign_data
     editurl: 'clientArray'
     colNames: [ '', '作品No', '作家名', 'タイトル', 'ＥＤ・号数', '分類・技法', '体裁', '状況', '委託価格', '上代', '下代', '原価', '備考', 'id', '作品ID']
-    colModel: [ { name:'actions', width: 40, formatter: "actions", formatoptions: {keys: true, delbutton : true, delOptions: {}}}
+    colModel: [ { name:'actions', width: 40, formatter: "actions", formatoptions: {keys: false,editbutton: false, delbutton: true, delOptions: {}}}
                 { name:'artwork_no', width: 100, editable: true, sortable: false, edittype: "select",
-                editoptions: { value: consign_artwork_id , dataInit: (artwork_id) -> $(artwork_id).select2 theme: "bootstrap", dropdownAutoWidth: true,  width: "1120px" } }
-                { name:'name', width: 160, sortable: false }
-                { name:'title', width: 240, sortable: false }
-                { name:'size', width: 120, sortable: false }
+                editoptions: { value: consign_artwork_id , dataInit: (artwork_id) -> $(artwork_id).select2 theme: "bootstrap", dropdownAutoWidth: true,  width: "1080px" } }
+                { name:'name', width: 180, sortable: false }
+                { name:'title', width: 260, sortable: false }
+                { name:'size', width: 100, sortable: false }
                 { name:'category', width: 160, sortable: false }
-                { name:'format', width: 100, sortable: false }
+                { name:'format', width: 80, sortable: false }
                 { name:'status', width: 80, sortable: false }
                 { name:'price', width: 120, editable: true, sortable: false, align : 'right', formatter: 'number', summaryType: 'sum',
                 formatoptions: { decimalSeparator: ".",thousandsSeparator: ",", decimalPlaces: 0, defaultValue: '' } }
@@ -86,18 +87,21 @@ $ ->
     viewrecords: true
     sortorder: 'asc'
     caption:''
+#    pager: '#consign_slip_pager'
 
+#  $('#consign_slip').navGrid '#consign_slip_pager',{ edit: false, add: false, del: true, search: false, refresh: false, view: false, position: "left", cloneToTop: false }
 # 新規伝票ボタン
   $('#consign_slip_new').click ->
     location.href = '/consign_slips/new'
 
+# 作品登録ボタン
+  $('#consign_slip_artwork').click ->
+    if $("#consign_slip_id").val()
+      id = $("#consign_slip").jqGrid('getGridParam','selrow')
+      ret = $("#consign_slip").jqGrid('getRowData',id)
+      if ret.artwork_id
+        window.open('/artworks/' + ret.artwork_id,'', 'height=560, width=1200')
+
 # 伝票No変更
   $('#consign_slip_id').change ->
     location.href = '/consign_slips/' + $('#consign_slip_id').val()
-
-# 作品詳細ボタン
-  $('#consign_slip_artwork').click ->
-    id = $("#consign_slip").jqGrid('getGridParam','selrow')
-    ret = $("#consign_slip").jqGrid('getRowData',id)
-    if ret.artwork_id
-      window.open('/artworks/' + ret.artwork_id,'', 'height=600, width=1200')

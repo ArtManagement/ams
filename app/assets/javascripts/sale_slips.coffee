@@ -3,27 +3,38 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 sale_data = gon.sale_data
 sale_artwork_id = gon.sale_artwork_id
+
 $ ->
   $('#sale_slip').jqGrid
     styleUI: 'Bootstrap'
     datatype: 'local'
     data: sale_data
     editurl: 'clientArray'
-    colNames: ['id', '作品ID', '作品No', '作家名', 'タイトル', 'ＥＤ・号数', '分類・技法', '体裁', '売上価格', '上代', '下代', '備考']
-    colModel: [ { name:'id', width: 0,hidden : true }
-                { name:'artwork_id', width: 0,hidden : true }
-                { name:'artwork_no', width: 100, editable: true, frozen: true, edittype: "select",
-                editoptions: { value: sale_artwork_id , dataInit: (artwork_id) -> $(artwork_id).select2 theme: "bootstrap", dropdownAutoWidth: true,  width: "1120px" } }
-                { name:'name', width: 180, frozen: true }
-                { name:'title', width: 280, frozen: true }
-                { name:'size', width: 140 }
-                { name:'category', width: 200 }
-                { name:'format', width: 95 }
-                { name:'price', width: 120, editable: true, align : 'right', formatter: 'number', summaryType: 'sum',
-                formatoptions: { decimalSeparator: ".",thousandsSeparator: ",", decimalPlaces: 0, defaultValue: 0 } }
-                { name:'retail_price', width: 120, align : 'right'}
-                { name:'wholesale_price', width: 120, align : 'right'}
-                { name:'note', width: 200, editable: true, edittype: "textarea"} ]
+    colNames: [ '', '作品No', '作家名', 'タイトル', 'ＥＤ・号数', '分類・技法', '体裁', '状況', '売上価格', '上代', '下代', '原価', '備考', 'id', '作品ID']
+    colModel: [ { name:'actions', width: 40, formatter: "actions", formatoptions: {keys: false,editbutton: false, delbutton: true, delOptions: {}}}
+                { name:'artwork_no', width: 100, editable: true, sortable: false, edittype: "select",
+                editoptions: { value: sale_artwork_id , dataInit: (artwork_id) -> $(artwork_id).select2 theme: "bootstrap", dropdownAutoWidth: true,  width: "1080px" } }
+                { name:'name', width: 180, sortable: false }
+                { name:'title', width: 260, sortable: false }
+                { name:'size', width: 100, sortable: false }
+                { name:'category', width: 160, sortable: false }
+                { name:'format', width: 80, sortable: false }
+                { name:'status', width: 80, sortable: false }
+                { name:'price', width: 120, editable: true, sortable: false, align : 'right', formatter: 'number', summaryType: 'sum',
+                formatoptions: { decimalSeparator: ".",thousandsSeparator: ",", decimalPlaces: 0, defaultValue: '' } }
+                { name:'retail_price', width: 100, sortable: false, align : 'right', formatter: 'number',
+                formatoptions: { decimalSeparator: ".",thousandsSeparator: ",", decimalPlaces: 0, defaultValue: '' }}
+                { name:'wholesale_price', width: 100, sortable: false, align : 'right', formatter: 'number',
+                formatoptions: { decimalSeparator: ".",thousandsSeparator: ",", decimalPlaces: 0, defaultValue: '' }}
+                { name:'cost', width: 100, sortable: false, align : 'right', formatter: 'number',
+                formatoptions: { decimalSeparator: ".",thousandsSeparator: ",", decimalPlaces: 0, defaultValue: '' }}
+                { name:'note', width: 200, sortable: false, editable: true, edittype: "textarea"}
+                { name:'id', width: 0,hidden : true }
+                { name:'artwork_id', width: 0,hidden : true } ]
+    beforeEditCell: ( rowid, cellname, value, iRow, iCol ) ->
+      if cellname == 'artwork_no'
+        ret = $("#sale_slip").jqGrid('getRowData',rowid)
+        tmp = ret.artwork_no
     afterSaveCell: ( rowid, cellname, value, iRow, iCol ) ->
       if cellname == 'artwork_no'
         ret = $("#sale_slip").jqGrid('getRowData',rowid)
@@ -44,9 +55,9 @@ $ ->
             $('#sale_slip').addRowData undefined,{artwork_id:'',price:''}
       if cellname == 'price'
         ret = $("#sale_slip").jqGrid('getRowData',rowid)
-        if ret.artwork_no != ''
+        if ret.id != null
           $.ajax
-            type: 'POST'
+            type: 'GET'
             url: '/sale_slips/priceSet'
             async: false
             datatype: 'json'
@@ -76,10 +87,20 @@ $ ->
     viewrecords: true
     sortorder: 'asc'
     caption:''
+#    pager: '#sale_slip_pager'
 
+#  $('#sale_slip').navGrid '#sale_slip_pager',{ edit: false, add: false, del: true, search: false, refresh: false, view: false, position: "left", cloneToTop: false }
 # 新規伝票ボタン
   $('#sale_slip_new').click ->
     location.href = '/sale_slips/new'
+
+# 作品登録ボタン
+  $('#sale_slip_artwork').click ->
+    if $("#sale_slip_id").val()
+      id = $("#sale_slip").jqGrid('getGridParam','selrow')
+      ret = $("#sale_slip").jqGrid('getRowData',id)
+      if ret.artwork_id
+        window.open('/artworks/' + ret.artwork_id,'', 'height=560, width=1200')
 
 # 伝票No変更
   $('#sale_slip_id').change ->

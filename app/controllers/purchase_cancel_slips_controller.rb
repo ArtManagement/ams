@@ -2,19 +2,18 @@ class PurchaseCancelSlipsController < ApplicationController
   def index
     @purchase_cancel_slip = PurchaseCancelSlip.new
     @slip_no = PurchaseCancelSlip.select(:id,:slip_no).order(slip_no: :desc).all
-    @staff = Staff.select(:id, :staff).where("company_id = 0").order(:staff_no)
-    @customer = Customer.select(:id, "name || '／' || kana AS customer").where("company_id = 0").order(:kana)
+    @staff = Staff.select(:id, :staff).order(:staff_no)
+    @customer = Customer.select(:id, "name || '／' || kana AS customer").order(:kana)
     @purchase_cancel_slip.date = Date.current
     @sort = Sort.select(:sort_key, :sort).all
-    gon.purchase_cancel_artwork_id = Purchase.includes({artwork: [:artist, :category, :technique, :size, :size_unit, :format]},:purchase_cancels).order(:id)
-                                             .where(purchase_cancels: {id: nil}).pluck(:id, "artwork_no || '　　' || name || '／' || title AS artwork_no")
+    gon.purchase_cancel_artwork_id = []
   end
 
   def show
     id = params[:id]
     @purchase_cancel_slip = PurchaseCancelSlip.find(params[:id])
     @slip_no = PurchaseCancelSlip.select(:id,:slip_no).order(slip_no: :desc).all
-    @customer = Customer.select(:id, "name || '／' || kana AS customer").where("company_id = 0").order(:kana)
+    @customer = Customer.select(:id, "name || '／' || kana AS customer").order(:kana)
     @staff = Staff.select(:id, :staff).where("company_id = 0").order(:staff_no)
     @sort = Sort.select(:sort_key, :sort).all
     gon.purchase_cancel_artwork_id = Purchase.includes({artwork: [:artist, :category, :technique, :size, :size_unit, :format]},:purchase_cancels, :purchase_slip).order(:id)
@@ -31,11 +30,10 @@ class PurchaseCancelSlipsController < ApplicationController
     @purchase_cancel_slip = PurchaseCancelSlip.new
     @slip_no = PurchaseCancelSlip.select(:id,:slip_no).order(slip_no: :desc).all
     @staff = Staff.select(:id, :staff).where("company_id = 0").order(:staff_no)
-    @customer = Customer.select("id, name || '／' || kana AS customer").where("company_id = 0").order(:kana)
+    @customer = Customer.select("id, name || '／' || kana AS customer").order(:kana)
     @sort = Sort.select(:sort_key, :sort).all
     @purchase_cancel_slip.date = Date.current
-    gon.purchase_cancel_artwork_id = Purchase.includes({artwork: [:artist, :category, :technique, :size, :size_unit, :format]},:purchase_cancels).order(:id)
-                                             .where(purchase_cancels: {id: nil}).pluck(:id, "artwork_no || '　　' || name || '／' || title AS artwork_no")
+    gon.purchase_cancel_artwork_id = []
   end
 
   def create

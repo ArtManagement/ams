@@ -1,4 +1,4 @@
-<title><%= content_for?(:title) ? yield(:title) : "返品伝票" %></title>
+<title><%= content_for?(:title) ? yield(:title) : "売上返品伝票" %></title>
 <div class="container">
   <div class="row">
     <div class="col-lg-6">
@@ -36,7 +36,7 @@
     </div>
     <div class="col-lg-2">
       <div class="form-group row">
-        <table id = "Sale_cancel_sum" class="table table-sm table-bordered">
+        <table id = "sale_cancel_sum" class="table table-sm table-bordered">
           <thead>
             <tr class="table-primary">
               <th class="text-primary">作品数</th>
@@ -68,14 +68,11 @@
     </div>
     <div class="col-lg-7">
 <p></p>
-
-  <div class="btn-toolber">
-        <input class="btn btn-primary col-lg-2" id="Sale_cancel_slip_new" type="button" value="新規伝票">
-        <%= f.submit "登録・更新", data: { disable_with: "登録中..." } ,:class => "btn btn-primary col-lg-2" %>
-        <input class="btn btn-primary col-lg-2" id="adtl" type="button" value="作品詳細" onclick="window.open('/artworks/','作品詳細', 'height=600, width=1200');return false;">
-        <input class="btn btn-primary col-lg-2" id="apnt" type="button" value="印刷">
-        <input class="btn btn-primary col-lg-2" id="acls" type="button" value="閉じる" onClick="window.close()">
-  </div>
-
+      <input class="btn btn-primary" id="sale_cancel_slip_refer" type="button" value="　参　照　">
+      <input class="btn btn-primary" id="sale_cancel_slip_new" type="button" value="　新規伝票　">
+      <%= f.submit "　登録更新　", data: { disable_with: "登録中..." } ,:class => "btn btn-primary" %>
+      <input class="btn btn-primary" id="sale_cancel_slip_artwork" type="button" value="　作品詳細　">
+      <input class="btn btn-primary" id="sale_cancel_slip_print" type="button" value="　印　刷　">
+      <input class="btn btn-primary" id="sale_cancel_slip_close" type="button" value="　閉じる　" onClick="window.close()">
   </div>
 </div>

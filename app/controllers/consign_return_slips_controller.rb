@@ -6,8 +6,7 @@ class ConsignReturnSlipsController < ApplicationController
     @customer = Customer.select(:id, "name || '／' || kana AS customer").where("company_id = 0").order(:kana)
     @consign_return_slip.date = Date.current
     @sort = Sort.select(:sort_key, :sort).all
-    gon.consign_return_artwork_id = Consign.includes({artwork: [:artist, :category, :technique, :size, :size_unit, :format]},:consign_returns).order(:id)
-                                             .where(consign_returns: {id: nil}).pluck(:id, "artwork_no || '　　' || name || '／' || title AS artwork_no")
+    gon.consign_return_artwork_id = []
   end
 
   def show
@@ -34,14 +33,13 @@ class ConsignReturnSlipsController < ApplicationController
     @customer = Customer.select("id, name || '／' || kana AS customer").where("company_id = 0").order(:kana)
     @sort = Sort.select(:sort_key, :sort).all
     @consign_return_slip.date = Date.current
-    gon.consign_return_artwork_id = Consign.includes({artwork: [:artist, :category, :technique, :size, :size_unit, :format]},:consign_returns).order(:id)
-                                             .where(consign_returns: {id: nil}).pluck(:id, "artwork_no || '　　' || name || '／' || title AS artwork_no")
+    gon.consign_return_artwork_id = []
   end
 
   def create
     @consign_return_slip = ConsignReturnSlip.new(consign_return_slip_params)
     @counter = Counter.find_by(year: @consign_return_slip.date.year,company_id: 1)
-    @consign_return_slip.slip_no = "T" + @consign_return_slip.date.to_s[2,2] + "-" + sprintf("%04d",@counter.consign)
+    @consign_return_slip.slip_no = "C" + @consign_return_slip.date.to_s[2,2] + "-" + sprintf("%04d",@counter.consign)
     if @consign_return_slip.save
       @counter.consign = @counter.consign + 1
       @counter.save

@@ -5,46 +5,49 @@
       <div class="col-lg-4">
 <p></p>
         <div class="form-group row">
-          <%= label_tag 'purchase_lists[purchase_date_from]','仕入日：', :class => 'col-form-label col-lg-3 text-right text-danger' %>
-          <%= text_field_tag 'purchase[purchase_date_from]', '', :class => 'form-control date-picker text-center col-lg-4' %>
-          <%= label_tag 'purchase_lists[purchase_date_to]','〜', :class => 'col-form-label col-lg-1 text-danger' %>
-          <%= text_field_tag 'purchase[purchase_date_to]', '', :class => 'form-control date-picker text-center col-lg-4' %>
+          <%= label_tag :purchase_lists, '仕入日:', :class => 'col-form-label col-lg-3 text-right text-danger' %>
+          <%= text_field :purchase_lists, :date_from, :class => 'form-control date-picker text-center col-lg-4' %>
+          <%= label_tag :purchase_lists, '〜', :class => 'col-form-label col-lg-1 text-danger' %>
+          <%= text_field :purchase_lists, :date_to, :class => 'form-control date-picker text-center col-lg-4' %>
         </div>
       </div>
       <div class="col-lg-6">
 <p></p>
         <div class="form-group row">
-          <%= label_tag 'purchase_lists[customer_id]','仕入先：', :class => 'col-form-label col-lg-2 text-right text-danger' %>
-          <%= select_tag 'purchase_lists[customer_id]', options_from_collection_for_select(@customer, :id, :customer), {:class => 'form-control col-lg-10 select-id', :include_blank => true} %>
+          <%= label_tag :purchase_lists, '仕入先：', :class => 'col-form-label col-lg-2 text-right text-danger' %>
+          <%= select_tag :purchase_lists_supplier_id, options_from_collection_for_select(@customer, :id, :customer), {:class => 'form-control col-lg-10 select-id', :include_blank => true} %>
         </div>
       </div>
       <div class="col-lg-2">
 <p></p>
         <div class="form-group row">
-          <%= label_tag 'purchase_lists[status_id]','状況：', :class => 'col-form-label col-lg-6 text-right text-danger' %>
-          <%= select_tag 'purchase_lists[status_id]', options_for_select([['', 0],['返品', 1],['売上',2]]), {:class => 'form-control col-lg-6 select-id'} %>
+          <%= label_tag :purchase_lists, '状況：', :class => 'col-form-label col-lg-6 text-right text-danger' %>
+          <%= select_tag :purchase_lists_status_id, options_for_select([['', 0],['仕入', 1],['返品', 2],['在庫',3],['売上',4]]), {:class => 'form-control col-lg-6 select-id'} %>
         </div>
       </div>
       <div class="col-lg-4">
         <div class="form-group row">
-          <%= label_tag 'purchase_lists[artist_id]','作家：', :class => 'col-form-label col-lg-3 text-right text-danger' %>
-          <%= select_tag 'purchase_lists[artist_id]', options_from_collection_for_select(@artist, :id, :artist), {:class => 'form-control col-lg-9 select-id', :include_blank => true} %>
+          <%= label_tag :purchase_lists, '作家：', :class => 'col-form-label col-lg-3 text-right text-danger' %>
+          <%= select_tag :purchase_lists_artist_id, options_from_collection_for_select(@artist, :id, :artist), {:class => 'form-control col-lg-9 select-id', :include_blank => true} %>
         </div>
         <div class="form-group row">
-          <%= label_tag 'purchase_lists[title]','タイトル：', :class => 'col-form-label col-lg-3 text-right text-danger' %>
-          <%= text_field_tag 'purchase[title]', '', :class => 'form-control col-lg-9' %>
+          <%= label_tag :purchase_lists, 'タイトル：', :class => 'col-form-label col-lg-3 text-right text-danger' %>
+          <%= text_field :purchase_lists, :title, :class => 'form-control col-lg-9' %>
         </div>
       </div>
       <div class="col-lg-4">
         <div class="form-group row">
-          <%= label_tag 'purchase_lists[category]','分類技法：', :class => 'col-form-label col-lg-3 text-right text-danger' %>
-          <%= select_tag 'purchase_lists[category]', options_from_collection_for_select(@category, :id, :category), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
-          <%= select_tag 'purchase_lists[technique]', options_from_collection_for_select(@technique, :id, :technique), {:class => 'form-control col-lg-5 select-id', :include_blank => true} %>
+          <%= label_tag :purchase_lists, '分類技法：', :class => 'col-form-label col-lg-3 text-right text-danger' %>
+          <%= select_tag :purchase_lists_category_id, options_from_collection_for_select(@category, :id, :category), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
+          <%= select_tag :purchase_lists_technique_id, options_from_collection_for_select(@technique, :id, :technique), {:class => 'form-control col-lg-5 select-id', :include_blank => true} %>
         </div>
         <div class="form-group row">
-          <%= label_tag 'purchase_lists[format]','体裁：', :class => 'col-form-label col-lg-3 text-right text-danger' %>
-          <%= select_tag 'purchase_lists[format]', options_from_collection_for_select(@format, :id, :format), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
+          <%= label_tag :purchase_lists, '体裁：', :class => 'col-form-label col-lg-3 text-right text-danger' %>
+          <%= select_tag :purchase_lists_format_id, options_from_collection_for_select(@format, :id, :format), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
+          <%= label_tag :purchase_lists, ':', :class => 'col-form-label col-lg-2 text-right text-danger' %>
+          <input class="btn btn-danger col-lg-3 col-lg-offset-1" id="purchase_lists_search" type="button" value="検索">
         </div>
+
       </div>
       <div class="col-lg-4">
 
@@ -75,23 +78,21 @@
       <div class="col-lg-4">
 <p></P>
         <div class="form-group row">
-          <%= label_tag 'purchase_lists[sort1]','並び替え：', :class => 'col-form-label col-lg-3 text-right text-danger' %>
-          <%= select_tag 'purchase_lists[sort1]', options_from_collection_for_select(@sort, :sort_key, :sort), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
-          <%= select_tag 'purchase_lists[sort2]', options_from_collection_for_select(@sort, :sort_key, :sort), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
-          <%= select_tag 'purchase_lists[sort3]', options_from_collection_for_select(@sort, :sort_key, :sort), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
+          <%= label_tag :purchase_lists,'並び替え：', :class => 'col-form-label col-lg-3 text-right text-danger' %>
+          <%= select_tag :sort1, options_from_collection_for_select(@sort, :sort_key, :sort), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
+          <%= select_tag :sort2, options_from_collection_for_select(@sort, :sort_key, :sort), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
+          <%= select_tag :sort3, options_from_collection_for_select(@sort, :sort_key, :sort), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
         </div>
       </div>
-      <div class="col-lg-1">
+      <div class="col-lg-2">
       </div>
-      <div class="col-lg-7">
-<p></P>
-        <div class="btn-toolber">
-          <input class="btn btn-danger col-lg-2" id="purchase_list_seach" type="button" value="検索条件">
-          <input class="btn btn-danger col-lg-2" id="purchase_list_slip" type="button" value="伝票修正">
-          <input class="btn btn-danger col-lg-2" id="purchase_list_artwork" type="button" value="作品詳細">
-          <input class="btn btn-danger col-lg-2" id="purcahse_list_print" type="button" value="印刷">
-          <input class="btn btn-danger col-lg-2" id="purchase_list_close" type="button" value="閉じる" onClick="window.close()">
-        </div>
+      <div class="col-lg-6">
+<p></p>
+        <input class="btn btn-danger" id="purchase_list_seach" type="button" value="　検索条件　">
+        <input class="btn btn-danger" id="purchase_list_slip" type="button" value="　伝票修正　">
+        <input class="btn btn-danger" id="purchase_list_artwork" type="button" value="　作品詳細　">
+        <input class="btn btn-danger" id="purcahse_list_print" type="button" value="　印　刷　">
+        <input class="btn btn-danger" id="purchase_list_close" type="button" value="　閉じる　" onClick="window.close()">
       </div>
     </div>
   </div>

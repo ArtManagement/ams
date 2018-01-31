@@ -6,8 +6,7 @@ class SaleCancelSlipsController < ApplicationController
     @customer = Customer.select(:id, "name || '／' || kana AS customer").where("company_id = 0").order(:kana)
     @sale_cancel_slip.date = Date.current
     @sort = Sort.select(:sort_key, :sort).all
-    gon.sale_cancel_artwork_id = Sale.includes({artwork: [:artist, :category, :technique, :size, :size_unit, :format]},:sale_cancels).order(:id)
-                                             .where(sale_cancels: {id: nil}).pluck(:id, "artwork_no || '　　' || name || '／' || title AS artwork_no")
+    gon.sale_cancel_artwork_id = []
   end
 
   def show
@@ -34,8 +33,7 @@ class SaleCancelSlipsController < ApplicationController
     @customer = Customer.select("id, name || '／' || kana AS customer").where("company_id = 0").order(:kana)
     @sort = Sort.select(:sort_key, :sort).all
     @sale_cancel_slip.date = Date.current
-    gon.sale_cancel_artwork_id = Sale.includes({artwork: [:artist, :category, :technique, :size, :size_unit, :format]},:sale_cancels).order(:id)
-                                             .where(sale_cancels: {id: nil}).pluck(:id, "artwork_no || '　　' || name || '／' || title AS artwork_no")
+    gon.sale_cancel_artwork_id = []
   end
 
   def create

@@ -1,0 +1,2 @@
+module PaymentSlipsHelper
+end

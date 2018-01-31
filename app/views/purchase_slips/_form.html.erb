@@ -5,7 +5,7 @@
 <p></p>
       <div class="form-group row">
         <%= f.label :id, "伝票No：", :class => "col-form-label col-lg-2 text-right text-danger" %>
-        <%= f.collection_select :id, @slip_no, :id, :slip_no, {:include_blank => true}, {:class => "form-control col-lg-3 select-no" } %>
+        <%= f.collection_select :id, @slip_no, :id, :slip_no, {:include_blank => true}, {:class => "form-control col-lg-3 select-no" } %><%= @mag %>
       </div>
     </div>
     <div class="col-lg-6">
@@ -79,14 +79,12 @@
     </div>
     <div class="col-lg-7">
 <p></p>
-
-  <div class="btn-toolber">
-        <input class="btn btn-danger col-lg-2" id="purchase_slip_new" type="button" value="新規伝票">
-        <%= f.submit "登録・更新", data: { disable_with: "登録中..." } ,:class => "btn btn-danger col-lg-2" %>
-        <input class="btn btn-danger col-lg-2" id="purchase_slip_artwork" type="button" value="作品登録">
-        <input class="btn btn-danger col-lg-2" id="pnt" type="button" value="印刷">
-        <input class="btn btn-danger col-lg-2" id="cls" type="button" value="閉じる" onClick="window.close()">
-  </div>
-
+      <input class="btn btn-danger" id="purchase_slip_refer" type="button" value="　参　照　">
+      <input class="btn btn-danger" id="purchase_slip_new" type="button" value="　新規伝票　">
+      <%= f.submit "　登録更新　", data: { disable_with: "登録中..." } ,:class => "btn btn-danger" %>
+      <input class="btn btn-danger" id="purchase_slip_artwork" type="button" value="　作品登録　">
+      <input class="btn btn-danger" id="pnt" type="button" value="　印　刷　">
+      <input class="btn btn-danger" id="cls" type="button" value="　閉じる　" onClick="window.close()">
+    </div>
   </div>
 </div>
