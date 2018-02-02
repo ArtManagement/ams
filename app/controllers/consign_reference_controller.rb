@@ -1,0 +1,2 @@
+class ConsignReferenceController < ApplicationController
+end

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 #  get    '/purchase_lists', to: 'purchase_lists#index'
 #  get    '/sale_lists',     to: 'sale_lists#index'
 #  get    '/trust_lists',    to: 'trust_lists#index'
-  get    '/consign_lists',  to: 'consign_lists#index'
+#  get    '/consign_lists',  to: 'consign_lists#index'
 
   resources :artworks
   resources :artwork_images
@@ -38,6 +38,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :consign_references do
+    collection do
+      get :search
+    end
+
+  end
   resources :payment_lists do
     collection do
       get :search
@@ -119,5 +125,12 @@ Rails.application.routes.draw do
       get :priceSet
     end
   end
-  
+
+  resources :exhibit_slips do
+    collection do
+      get :artworkGet
+      get :priceSet
+    end
+  end
+
 end

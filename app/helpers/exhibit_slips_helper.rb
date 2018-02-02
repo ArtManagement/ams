@@ -1,0 +1,2 @@
+module ExhibitSlipsHelper
+end

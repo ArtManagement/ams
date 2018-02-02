@@ -62,6 +62,10 @@ $ ->
   $('#menu_receivable_list').click ->
     window.open('/receivable_lists','', 'height=768, width=1300')
 
+#出品関連
+  $('#menu_exhibit_slip').click ->
+    window.open('/exhibit_slips/new','', 'height=720, width=1250')
+
 #在庫
 
   $('#menu_stock_list').click ->

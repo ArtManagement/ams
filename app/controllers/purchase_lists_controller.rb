@@ -181,7 +181,7 @@ class PurchaseListsController < ApplicationController
        artist_id_to = params[:artist_id]
      end
 
-     title = params[:title] + '%'
+     title = '%' + params[:title] + '%'
 
      if params[:supplier_id] == ''
        supplier_id_from = 0

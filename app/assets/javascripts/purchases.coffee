@@ -7,7 +7,6 @@ $ ->
   $('#purchase_new').click ->
     param = location.search
     location.href = '/purchases/new' + param
-    param.slice(1) + ''
 
 # 仕入No変更
   $('#purchase_id').on ->

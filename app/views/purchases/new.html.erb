@@ -1,3 +1,119 @@
+<title><%= content_for?(:title) ? yield(:title) : "仕入登録" %></title>
 <%= form_for(@purchase) do |f| %>
-    <%= render "form", f: f %>
+<div class="container">
+  <div class="row">
+    <%= f.fields_for :artwork do |a| %>
+    <div class="col-lg-6">
+  <p></p>
+      <div class="form-group row">
+        <%= f.label :id, "作品No：", :class => "col-form-label col-lg-3 text-danger text-right" %>
+        <%= f.collection_select :id, @artwork_no, :id, :artwork_no, {:include_blank => true}, {:class => "form-control col-lg-3 select-no" } %>
+        <%= f.label :purchase_slip_id, '伝票No:', :class => "col-form-label col-lg-2 text-danger text-right" %>
+        <%= f.text_field :purchase_slip_id, :class => 'form-control col-lg-3' %>
+      </div>
+      <div class="form-group row">
+        <%= a.label :artist_id, "作家：", :class => "col-form-label col-lg-3 text-danger text-right" %>
+        <%= a.collection_select :artist_id, @artist, :id, :artist, {:include_blank => true},{:class => 'form-control col-lg-8 select-id'} %>
+      </div>
+      <div class="form-group row">
+        <%= a.label :title, "タイトル：", :class => "col-form-label col-lg-3 text-danger text-right" %>
+        <%= a.text_area :title, :class => "form-control col-lg-8", rows: 2 %>
+      </div>
+      <div class="form-group row">
+        <%= a.label :category_id, "分類／技法：", :class => "col-form-label col-lg-3 text-danger text-right" %>
+        <%= a.collection_select :category_id, @category, :id, :category, {:include_blank => true},{:class => 'form-control col-lg-3 select-id'} %>
+        <%= a.collection_select :technique_id, @technique, :id, :technique, {:include_blank => true},{:class => 'form-control col-lg-5 select-id'} %>
+      </div>
+      <div class="form-group row">
+        <%= a.label :technique_etc, "技法（その他）：", :class => "col-form-label col-lg-3 text-danger text-right" %>
+        <%= a.text_field :technique_etc, :class => 'form-control col-lg-8' %>
+      </div>
+      <div class="form-group row">
+        <%= a.label :size_unit_id, "号数：", :class => "col-form-label col-lg-3 text-danger text-right" %>
+        <%= a.collection_select :size_unit_id, @size_unit, :id, :size_unit, {:include_blank => true}, {:class => "form-control col-lg-2 select-id"} %>
+        <%= a.collection_select :size_id, @size, :id, :size, {:include_blank => true},{:class => "form-control col-lg-3 select-id"} %>
+      </div>
+      <div class="form-group row">
+        <%= a.label :edition, "エディション：", :class => "col-form-label col-lg-3 text-danger text-right" %>
+        <%= a.text_field :edition, :class => "form-control col-lg-3 text-right" %>
+        <%= a.text_field :edition_no, :class => "form-control col-lg-2 text-right" %>
+        <%= a.label :edition_limit, "／", :class => "col-form-label col-lg-1 text-right" %>
+        <%= a.text_field :edition_limit, :class => "form-control col-lg-2 text-right" %>
+      </div>
+      <div class="form-group row">
+        <%= a.label :production_year, "製作年：", :class => "col-form-label col-lg-3 text-danger text-right" %>
+        <%= a.text_field :production_year, :class => "form-control col-lg-3 text-right" %>
+        <%= a.label :raisonne, "レゾネ：", :class => "col-form-label col-lg-2 text-danger text-right" %>
+        <%= a.text_field :raisonne, :class => "form-control col-lg-3" %>
+      </div>
+      <div class="form-group row">
+        <%= a.label :motif_id, "題材：", :class => "col-form-label col-lg-3 text-danger text-right" %>
+        <%= a.collection_select :motif_id, @motif, :id, :format, {:include_blank => true},{:class => "form-control col-lg-3 select-id"} %>
+        <%= a.label :format_id, "体裁：", :class => "col-form-label col-lg-2 text-danger text-right" %>
+        <%= a.collection_select :format_id, @format, :id, :format, {:include_blank => true},{:class => "form-control col-lg-3 select-id"} %>
+      </div>
+    </div>
+    <div class="col-lg-6">
+  <p></p>
+      <div class="form-group row">
+        <%= a.label :size_title, "　　　　　　　　　　　　高さ　　　　　幅　　　　　奥行　　　　　単位", :class => "col-form-label col-lg-12 text-danger" %>
+        <%= a.label :heiｇｈｔ, "画面サイズ：", :class => "col-form-label col-lg-3 text-danger text-right" %>
+        <%= a.text_field :height, :class => "form-control col-lg-2 text-right" %>
+        <%= a.text_field :width, :class => "form-control col-lg-2 text-right" %>
+        <%= a.text_field :depth, :class => "form-control col-lg-2 text-right" %>
+        <%= a.select :unit, [["",""],["cm", "cm"], ["mm", "mm"],["in.", "in."]], {}, {:class => "form-control col-lg-2 select-id"} %>
+        <%= a.label :frame_heiｇｈｔ, "体裁サイズ：", :class => "col-form-label col-lg-3 text-danger text-right" %>
+        <%= a.text_field :frame_height, :class => "form-control col-lg-2 text-right" %>
+        <%= a.text_field :frame_width, :class => "form-control col-lg-2 text-right" %>
+        <%= a.text_field :frame_depth, :class => "form-control col-lg-2 text-right" %>
+        <%= a.select :frame_unit, [["",""],["cm", "cm"], ["mm", "mm"],["in.", "in."]], {}, {:class => "form-control col-lg-2 select-id"} %>
+      </div>
+      <div class="form-group row">
+        <%= a.label :size_etc, "サイズ：", :class => "col-form-label col-lg-3 text-danger text-right" %>
+        <%= a.text_field :size_etc, :class => "form-control col-lg-8" %>
+      </div>
+      <div class="form-group row">
+        <%= a.label :sign_etc, "サイン等：", :class => "col-form-label col-lg-3 text-danger text-right" %>
+        <%= a.check_box :sign %>
+        <%= a.label :sign, "サイン", :class => "checkbox-inline col-lg-2" %>
+        <%= a.check_box :signature %>
+        <%= a.label :signature, "落款", :class => "checkbox-inline col-lg-2" %>
+        <%= a.check_box :seal %>
+        <%= a.label :seal, "印", :class => "checkbox-inline col-lg-2" %>
+        <%= a.check_box :co_seal %>
+        <%= a.label :co_seal, "共シール", :class => "checkbox-inline col-lg-2" %>
+        <%= a.check_box :co_box %>
+        <%= a.label :co_box, "共箱", :class => "checkbox-inline col-lg-2" %>
+        <%= a.check_box :certificate %>
+        <%= a.label :certificate, "鑑定書", :class => "checkbox-inline col-lg-2" %>
+      </div>
+      <div class="form-group row">
+        <%= a.label :retail_price, "上代：", :class => "col-form-label col-lg-3 text-danger text-right" %>
+        <%= a.text_field :retail_price, data: {autonumeric: {mDec: 0}}, :class => "form-control col-lg-3 text-right" %>
+        <%= a.label :wholesale_price, "下代：", :class => "col-form-label col-lg-2 text-danger text-right" %>
+        <%= a.text_field :wholesale_price, data: {autonumeric: {mDec: 0}}, :class => "form-control col-lg-3 text-right" %>
+      </div>
+          <% end %>
+        <div class="form-group row">
+          <%= f.label :price, "仕入価格：", :class => "col-form-label col-lg-3 text-danger text-right" %>
+          <%= f.text_field :price, data: {autonumeric: {mDec: 0}}, :class => "form-control col-lg-3 text-right" %>
+        </div>
+      <div class="form-group row">
+        <%= f.label :retail_price, "備考：", :class => "col-form-label col-lg-3 text-danger text-right" %>
+        <%= f.text_area :note , :class => "form-control col-lg-8", rows:3 %>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-lg-7">
+    </div>
+    <div class="col-lg-5">
+      <input class="btn btn-danger" id="purchase_new" type="button" value="　新規入力　">
+      <%= f.submit "　登録更新　", data: { disable_with: "登録中..." } ,:class => "btn btn-danger" %>
+      <input class="btn btn-danger" id="purchase_image" type="button" value="　画　像　">
+      <input class="btn btn-danger" id="purchase_close" type="button" value="　閉じる　" onClick="window.close()">
+    </div>
+  </div>
+</div>
 <% end %>
