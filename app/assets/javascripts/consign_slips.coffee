@@ -1,10 +1,9 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-consign_data = gon.consign_data
-consign_artwork_id = gon.consign_artwork_id
-
 $ ->
+  consign_data = gon.consign_data
+  consign_artwork_id = gon.consign_artwork_id
   $('#consign_slip').jqGrid
     styleUI: 'Bootstrap'
     datatype: 'local'
@@ -90,6 +89,12 @@ $ ->
 #    pager: '#consign_slip_pager'
 
 #  $('#consign_slip').navGrid '#consign_slip_pager',{ edit: false, add: false, del: true, search: false, refresh: false, view: false, position: "left", cloneToTop: false }
+
+# 参照ボタン
+  $('#consign_slip_refer').click ->
+    if $("#consign_slip_id").val()
+      window.open('/consign_references/?slip_id=' + $("#consign_slip_id").val(),'', 'height=640, width=1200')
+
 # 新規伝票ボタン
   $('#consign_slip_new').click ->
     location.href = '/consign_slips/new'

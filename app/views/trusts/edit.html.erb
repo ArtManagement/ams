@@ -1,0 +1,4 @@
+<title><%= content_for?(:title) ? yield(:title) : "受託登録" %></title>
+<%= form_for(@trust) do |f| %>
+  <%= render "form", f: f %>
+<% end %>

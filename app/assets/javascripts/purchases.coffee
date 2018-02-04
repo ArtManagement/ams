@@ -5,6 +5,7 @@ $ ->
 
 # 新規ボタン
   $('#purchase_new').click ->
+#    slip_id = ('#purchase_slip_id').val()
     param = location.search
     location.href = '/purchases/new' + param
 
@@ -18,3 +19,5 @@ $ ->
 # 画像ボタン
   $('#purchase_image').click ->
     window.open('/images/','', 'height=560, width=1200')
+
+# 登録更新ボタン

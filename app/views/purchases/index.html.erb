@@ -1,20 +1,4 @@
-<%= form_for(@purchase) do |f| %>
 <title><%= content_for?(:title) ? yield(:title) : "仕入登録" %></title>
-<div class="container">
-  <div class="row">
-    <%= f.fields_for :artwork do |a| %>
-    <%= render "form", f: f %>
-    <% end %>
-  </div>
-  <div class="row">
-    <div class="col-lg-7">
-    </div>
-    <div class="col-lg-5">
-      <input class="btn btn-danger" id="purchase_new" type="button" value="　新規入力　">
-      <%= f.submit "　登録更新　", data: { disable_with: "登録中..." } ,:class => "btn btn-danger" %>
-      <input class="btn btn-danger" id="purchase_image" type="button" value="　画　像　">
-      <input class="btn btn-danger" id="purchase_close" type="button" value="　閉じる　" onClick="window.close()">
-    </div>
-  </div>
-</div>
+<%= form_for(@purchase) do |f| %>
+  <%= render "form", f: f %>
 <% end %>

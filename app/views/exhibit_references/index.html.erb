@@ -1,0 +1,56 @@
+<title><%= content_for?(:title) ? yield(:title) : "出品参照" %></title>
+<%= form_tag("/exhibit_references", method: "get") do %>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+<p></p>
+        <div class="form-group row">
+          <%= label_tag :exhibit_references, '作家：', :class => 'col-form-label col-lg-3 text-right text-default' %>
+          <%= select_tag :exhibit_references_artist_id, options_from_collection_for_select(@artist, :id, :artist), {:class => 'form-control col-lg-9 select-id', :include_blank => true} %>
+        </div>
+        <div class="form-group row">
+          <%= label_tag :exhibit_references, 'タイトル：', :class => 'col-form-label col-lg-3 text-right text-default' %>
+          <%= text_field :exhibit_references, :title, :class => 'form-control col-lg-9' %>
+        </div>
+      </div>
+      <div class="col-lg-4">
+<p></p>
+        <div class="form-group row">
+          <%= label_tag :exhibit_references, '分類技法：', :class => 'col-form-label col-lg-3 text-right text-default' %>
+          <%= select_tag :exhibit_references_category_id, options_from_collection_for_select(@category, :id, :category), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
+          <%= select_tag :exhibit_references_technique_id, options_from_collection_for_select(@technique, :id, :technique), {:class => 'form-control col-lg-5 select-id', :include_blank => true} %>
+        </div>
+        <div class="form-group row">
+          <%= label_tag :exhibit_references, '体裁：', :class => 'col-form-label col-lg-3 text-right text-default' %>
+          <%= select_tag :exhibit_references_format_id, options_from_collection_for_select(@format, :id, :format), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
+          <%= label_tag :exhibit_references, ':', :class => 'col-form-label col-lg-2 text-right text-default' %>
+          <input class="btn btn-default col-lg-3 col-lg-offset-1" id="exhibit_references_search" type="button" value="検索">
+        </div>
+
+      </div>
+      <div class="col-lg-4">
+
+      </div>
+      <div class="col-lg-12">
+        <table id="exhibit_reference"></table>
+      </div>
+      <div class="col-lg-4">
+<p></P>
+        <div class="form-group row">
+          <%= label_tag :exhibit_references,'並び替え：', :class => 'col-form-label col-lg-3 text-right text-default' %>
+          <%= select_tag :sort1, options_from_collection_for_select(@sort, :sort_key, :sort), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
+          <%= select_tag :sort2, options_from_collection_for_select(@sort, :sort_key, :sort), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
+          <%= select_tag :sort3, options_from_collection_for_select(@sort, :sort_key, :sort), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
+        </div>
+      </div>
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-6">
+<p></p>
+        <input class="btn btn-default" id="exhibit_reference_select" type="button" value="　 選　択 　">
+        <input class="btn btn-default" id="exhibit_reference_artwork" type="button" value="　作品詳細　">
+        <input class="btn btn-default" id="exhibit_reference_close" type="button" value="　 閉じる 　" onClick="window.close()">
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   post   '/login',          to: 'sessions#create'
   delete '/logout',         to: 'sessions#destroy'
   get    '/menus',          to: 'menus#index'
-  get    '/stock_lists',    to: 'stock_lists#index'
+#  get    '/stock_lists',    to: 'stock_lists#index'
 #  get    '/purchase_lists', to: 'purchase_lists#index'
 #  get    '/sale_lists',     to: 'sale_lists#index'
 #  get    '/trust_lists',    to: 'trust_lists#index'
@@ -38,12 +38,58 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :consign_references do
+  resources :stock_lists do
     collection do
       get :search
     end
-
   end
+
+  resources :inventory_lists do
+    collection do
+      get :search
+    end
+  end
+
+  resources :payable_lists do
+    collection do
+      get :search
+    end
+  end
+
+  resources :receivable_lists do
+    collection do
+      get :search
+    end
+  end
+
+  resources :purchase_references do
+    collection do
+      get :search
+      get :select
+    end
+  end
+
+  resources :sale_references do
+    collection do
+      get :search
+      get :select
+    end
+  end
+
+  resources :consign_references do
+    collection do
+      get :search
+      get :select
+    end
+  end
+
+  resources :exhibit_references do
+    collection do
+      get :search
+      get :select
+    end
+  end
+
   resources :payment_lists do
     collection do
       get :search
@@ -57,6 +103,10 @@ Rails.application.routes.draw do
   end
 
   resources :purchases do
+    resources :artworks
+  end
+
+  resources :trusts do
     resources :artworks
   end
 

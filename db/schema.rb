@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180131162720) do
+ActiveRecord::Schema.define(version: 20180204150503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -263,22 +263,17 @@ ActiveRecord::Schema.define(version: 20180131162720) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.integer  "artist_id"
-    t.string   "title"
-    t.integer  "category_id"
-    t.integer  "technique_id"
-    t.string   "technique_etc"
-    t.integer  "size_id"
-    t.integer  "size_unit_id"
-    t.string   "size_etc"
+    t.integer  "artwork_id"
     t.string   "image1"
     t.string   "image2"
     t.string   "image3"
     t.string   "image4"
     t.string   "image5"
     t.string   "image6"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "image7"
+    t.string   "image8"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "motifs", force: :cascade do |t|
@@ -541,6 +536,14 @@ ActiveRecord::Schema.define(version: 20180131162720) do
     t.integer "company_id"
     t.integer "staff_id"
     t.string  "password_digest"
+  end
+
+  create_table "warehouses", force: :cascade do |t|
+    t.string   "warehouse"
+    t.integer  "sort"
+    t.boolean  "usable"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

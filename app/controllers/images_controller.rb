@@ -1,25 +1,11 @@
 class ImagesController < ApplicationController
   def index
     @image = Image.new
-    @image_no = Image.select(:id,:id)
-    @artwork_no = Artwork.select(:id,:artwork_no)
-    @artist = Artist.select(:id, "name || '／' || kana AS artist").order(:kana).all
-    @category = Category.select(:id, :category).all
-    @technique = Technique.select(:id, :technique).all
-    @size = Size.select(:id, :size).all
-    @size_unit = SizeUnit.select(:id, :size_unit).all
+
   end
 
   def show
-    id = params[:id]
-    @image = Image.find(params[:id])
-    @image_no = Image.select(:id,:id)
-    @artwork_no = Artwork.select(:id,:artwork_no)
-    @artist = Artist.select(:id, "name || '／' || kana AS artist").order(:kana).all
-    @category = Category.select(:id, :category).all
-    @technique = Technique.select(:id, :technique).all
-    @size = Size.select(:id, :size).all
-    @size_unit = SizeUnit.select(:id, :size_unit).all
+    @image = Image
 
     render action: :edit
   end

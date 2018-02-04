@@ -90,6 +90,12 @@ $ ->
 #    pager: '#sale_slip_pager'
 
 #  $('#sale_slip').navGrid '#sale_slip_pager',{ edit: false, add: false, del: true, search: false, refresh: false, view: false, position: "left", cloneToTop: false }
+
+# 参照ボタン
+  $('#sale_slip_refer').click ->
+    if $("#sale_slip_id").val()
+      window.open('/sale_references/?slip_id=' + $("#sale_slip_id").val(),'', 'height=640, width=1200')
+
 # 新規伝票ボタン
   $('#sale_slip_new').click ->
     location.href = '/sale_slips/new'

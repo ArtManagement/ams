@@ -1,0 +1,2 @@
+module ReceivableListsHelper
+end

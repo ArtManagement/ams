@@ -25,7 +25,7 @@
     </div>
     <div class="col-lg-6">
       <div class="form-group row" id = "exhibit_return" >
-        <%= f.label :scheduled_date, "予定日：", :class => "col-form-label col-lg-3 text-right text-default" %>
+        <%= f.label :scheduled_date, "終了予定日：", :class => "col-form-label col-lg-3 text-right text-default" %>
         <%= f.text_field :scheduled_date , :class => "form-control date-picker col-lg-3 text-center" %>
         <%= f.label :tax_class_id, "消費税：", :class => "col-form-label col-lg-2 text-right text-default" %>
         <%= f.select :tax_class_id, [["税込","0"],["税別", "1"]], {}, {:class => "form-control col-lg-2 select-id"} %>
@@ -34,8 +34,12 @@
     </div>
     <div class="col-lg-6">
       <div class="form-group row">
+        <%= f.label :event, "イベント：", :class => "col-form-label col-lg-2 text-right text-default" %>
+        <%= f.text_field :event , :class => "form-control col-lg-10" %>
+      </div>
+      <div class="form-group row">
         <%= f.label :note, "摘要：", :class => "col-form-label col-lg-2 text-right text-default" %>
-        <%= f.text_area :note , :class => "form-control col-lg-10", rows:2 %>
+        <%= f.text_area :note , :class => "form-control col-lg-10", rows:1 %>
       </div>
     </div>
     <div class="col-lg-2">

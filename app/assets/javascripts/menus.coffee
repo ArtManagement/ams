@@ -70,3 +70,6 @@ $ ->
 
   $('#menu_stock_list').click ->
     window.open('/stock_lists','', 'height=768, width=1300')
+
+  $('#menu_inventory_list').click ->
+    window.open('/inventory_lists','', 'height=768, width=1300')

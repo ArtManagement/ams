@@ -1,40 +1,38 @@
-<title><%= content_for?(:title) ? yield(:title) : "画像登録" %></title>
 <div class="container">
   <div class="row">
+    <%= f.fields_for :artwork do |a| %>
     <div class="col-lg-6">
 <p></p>
       <div class="form-group row">
-        <%= f.label :id, "画像No：", :class => "col-form-label col-lg-3 text-primary text-right" %>
-        <%= f.collection_select :id, @image_no, :id, :id, {:include_blank => true}, {:class => "form-control col-lg-3 select-no" } %>
-        <%= label_tag :images, "作品No：", :class => "col-form-label col-lg-2 text-primary text-right" %>
-        <%= select_tag :images_artwork_id, options_from_collection_for_select(@artwork_no, :id, :artwork_no), {:class => 'form-control col-lg-3 select-no', :include_blank => true} %>
+        <%= label_tag :images, '作品No：', :class => 'col-form-label col-lg-3 text-right text-default' %>
+        <%= text_field :images, :artwork_no, :class => 'form-control col-lg-3', :readonly => true %>
       </div>
       <div class="form-group row">
-        <%= f.label :artist_id, "作家：", :class => "col-form-label col-lg-3 text-primary text-right" %>
-        <%= f.collection_select :artist_id, @artist, :id, :artist, {:include_blank => true},{:class => 'form-control col-lg-8 select-id'} %>
+        <%= label_tag :images, '作家：', :class => 'col-form-label col-lg-3 text-right text-default' %>
+        <%= text_field :images, :artist, :class => 'form-control col-lg-8', :readonly => true%>
       </div>
       <div class="form-group row">
-        <%= f.label :title, "タイトル：", :class => "col-form-label col-lg-3 text-primary text-right" %>
-        <%= f.text_area :title, :class => "form-control col-lg-8", rows: 2 %>
+        <%= label_tag :images, 'タイトル：', :class => 'col-form-label col-lg-3 text-right text-default' %>
+        <%= text_area :images, :title, :class => 'form-control col-lg-8', :readonly => true , rows: 2%>
       </div>
       <div class="form-group row">
-        <%= f.label :category_id, "分類／技法：", :class => "col-form-label col-lg-3 text-primary text-right" %>
-        <%= f.collection_select :category_id, @category, :id, :category, {:include_blank => true},{:class => 'form-control col-lg-3 select-id'} %>
-        <%= f.collection_select :technique_id, @technique, :id, :technique, {:include_blank => true},{:class => 'form-control col-lg-5 select-id'} %>
+        <%= label_tag :images, '分類/技法：', :class => 'col-form-label col-lg-3 text-right text-default' %>
+        <%= text_field :images, :category, :class => 'form-control col-lg-3', :readonly => true %>
+        <%= text_field :images, :technique, :class => 'form-control col-lg-5', :readonly => true %>
       </div>
       <div class="form-group row">
-        <%= f.label :technique_etc, "技法（その他）：", :class => "col-form-label col-lg-3 text-primary text-right" %>
-        <%= f.text_field :technique_etc, :class => 'form-control col-lg-8' %>
+        <%= label_tag :images, '技法(その他)：', :class => 'col-form-label col-lg-3 text-right text-default' %>
+        <%= text_field :images, :technique_etc, :class => 'form-control col-lg-8', :readonly => true %>
       </div>
       <div class="form-group row">
-        <%= f.label :size_unit_id, "号数：", :class => "col-form-label col-lg-3 text-primary text-right" %>
-        <%= f.collection_select :size_unit_id, @size_unit, :id, :size_unit, {:include_blank => true}, {:class => "form-control col-lg-2 select-id"} %>
-        <%= f.collection_select :size_id, @size, :id, :size, {:include_blank => true},{:class => "form-control col-lg-3 select-id"} %>
+        <%= label_tag :images, '号数：', :class => 'col-form-label col-lg-3 text-right text-default' %>
+        <%= text_field :images, :size, :class => 'form-control col-lg-8', :readonly => true %>
       </div>
       <div class="form-group row">
-        <%= f.label :title, "備考：", :class => "col-form-label col-lg-3 text-primary text-right" %>
-        <%= f.text_area :title, :class => "form-control col-lg-8", rows: 2 %>
+        <%= label_tag :images, '備考：', :class => 'col-form-label col-lg-3 text-right text-default' %>
+        <%= text_area :images, :note, :class => 'form-control col-lg-8', :readonly => true , rows: 2%>
       </div>
+    <% end %>
     </div>
     <div class="col-lg-3">
 <p></p>
@@ -76,14 +74,12 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-5">
+    <div class="col-lg-8">
     </div>
-    <div class="col-lg-7">
+    <div class="col-lg-4">
       <div class="toolbar">
-        <input class="btn btn-primary col-lg-2" id="image_new" type="button" value="新規登録">
-        <input class="btn btn-primary col-lg-2" id="image_edit" type="button" value="変更">
-        <%= f.submit "登録・更新", data: { disable_with: "更新中..." } ,:class => "btn btn-primary col-lg-2" %>
-        <input class="btn btn-primary col-lg-2" id="image_close" type="button" value="閉じる" onClick="window.close()">
+        <%= f.submit "　登録・更新　", data: { disable_with: "更新中..." } ,:class => "btn btn-primary" %>
+        <input class="btn btn-primary" id="image_close" type="button" value="　　閉じる　　" onClick="window.close()">
       </div>
     </div>
   </div>

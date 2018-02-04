@@ -88,6 +88,10 @@ $ ->
     sortorder: 'asc'
     caption:''
 #    pager: '#exhibit_slip_pager'
+# 参照ボタン
+  $('#exhibit_slip_refer').click ->
+    if $("#exhibit_slip_id").val()
+      window.open('/exhibit_references/?slip_id=' + $("#exhibit_slip_id").val(),'', 'height=640, width=1200')
 
 #  $('#exhibit_slip').navGrid '#exhibit_slip_pager',{ edit: false, add: false, del: true, search: false, refresh: false, view: false, position: "left", cloneToTop: false }
 # 新規伝票ボタン

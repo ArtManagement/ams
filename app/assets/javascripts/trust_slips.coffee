@@ -1,10 +1,9 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-trust_data = gon.trust_data
-trust_artwork_id = gon.trust_artwork_id
-
 $ ->
+  trust_data = gon.trust_data
+  trust_artwork_id = gon.trust_artwork_id
   $('#trust_slip').jqGrid
     styleUI: 'Bootstrap'
     datatype: 'local'
@@ -90,6 +89,12 @@ $ ->
 #    pager: '#trust_slip_pager'
 
 #  $('#trust_slip').navGrid '#trust_slip_pager',{ edit: false, add: false, del: true, search: false, refresh: false, view: false, position: "left", cloneToTop: false }
+
+# 参照ボタン
+  $('#trust_slip_refer').click ->
+    if $("#trust_slip_id").val()
+      window.open('/trust_references/?slip_id=' + $("#trust_slip_id").val(),'', 'height=640, width=1200')
+
 # 新規伝票ボタン
   $('#trust_slip_new').click ->
     location.href = '/trust_slips/new'
@@ -100,9 +105,9 @@ $ ->
       id = $("#trust_slip").jqGrid('getGridParam','selrow')
       ret = $("#trust_slip").jqGrid('getRowData',id)
       if ret.id
-        window.open('/trusts/' + ret.id,'', 'height=560, width=1200')
+        window.open('/artworks/' + ret.artwork_id,'', 'height=560, width=1200')
       else
-        window.open('/trusts/new?' + $("#trust_slip_id").val(),'', 'height=560, width=1200')
+        window.open('/trusts/new?slip_id=' + $("#trust_slip_id").val(),'', 'height=560, width=1200')
 
 # 伝票No変更
   $('#trust_slip_id').change ->

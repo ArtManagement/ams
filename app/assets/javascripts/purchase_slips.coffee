@@ -1,9 +1,9 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-purchase_data = gon.purchase_data
-purchase_artwork_id = gon.purchase_artwork_id
 $ ->
+  purchase_data = gon.purchase_data
+  purchase_artwork_id = gon.purchase_artwork_id
   $('#purchase_slip').jqGrid
     styleUI: 'Bootstrap'
     datatype: 'local'
@@ -89,6 +89,12 @@ $ ->
 #    pager: '#purchase_slip_pager'
 
 #  $('#purchase_slip').navGrid '#purchase_slip_pager',{ edit: false, add: false, del: true, search: false, refresh: false, view: false, position: "left", cloneToTop: false }
+
+# 参照ボタン
+  $('#purchase_slip_refer').click ->
+    if $("#purchase_slip_id").val()
+      window.open('/purchase_references/?slip_id=' + $("#purchase_slip_id").val(),'', 'height=640, width=1200')
+
 # 新規伝票ボタン
   $('#purchase_slip_new').click ->
     location.href = '/purchase_slips/new'
@@ -101,7 +107,7 @@ $ ->
       if ret.id
         window.open('/artworks/' + ret.artwork_id,'', 'height=560, width=1200')
       else
-        window.open('/purchases/new?q=' + $("#purchase_slip_id").val(),'', 'height=560, width=1200')
+        window.open('/purchases/new?slip_id=' + $("#purchase_slip_id").val(),'', 'height=560, width=1200')
 
 # 伝票No変更
   $('#purchase_slip_id').change ->
