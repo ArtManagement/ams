@@ -82,12 +82,11 @@
           <%= select_tag :sort3, options_from_collection_for_select(@sort, :sort_key, :sort), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
         </div>
       </div>
-      <div class="col-lg-2">
+      <div class="col-lg-3">
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-5">
 <p></p>
         <input class="btn btn-default" id="stock_list_seach" type="button" value="　検索条件　">
-        <input class="btn btn-default" id="stock_list_slip" type="button" value="　伝票修正　">
         <input class="btn btn-default" id="stock_list_artwork" type="button" value="　作品詳細　">
         <input class="btn btn-default" id="purcahse_list_print" type="button" value="　印　刷　">
         <input class="btn btn-default" id="stock_list_close" type="button" value="　閉じる　" onClick="window.close()">

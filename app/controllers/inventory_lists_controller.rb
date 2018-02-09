@@ -60,7 +60,7 @@ class InventoryListsController < ApplicationController
                       THEN '受託'
                  END
        END AS status,
-       CASE WHEN i.id IS NOT NULL
+       CASE WHEN a.image1 IS NOT NULL
             THEN '◯'
             ELSE ''
         END image
@@ -79,7 +79,6 @@ class InventoryListsController < ApplicationController
        LEFT OUTER JOIN consign_slips AS cs ON c.consign_slip_id = cs.id
          LEFT OUTER JOIN customers AS cu ON cs.customer_id = cu.id
      LEFT OUTER JOIN sales AS s ON a.id = s.artwork_id
-     LEFT OUTER JOIN images AS i ON a.id = i.artwork_id
      WHERE s.id IS NULL"
      gon.inventory_list_data =  Purchase.find_by_sql([sql])
 
@@ -139,7 +138,7 @@ class InventoryListsController < ApplicationController
                       THEN '受託'
                  END
        END AS status,
-       CASE WHEN i.id IS NOT NULL
+       CASE WHEN a.image1 IS NOT NULL
             THEN '◯'
             ELSE ''
         END image
@@ -158,7 +157,6 @@ class InventoryListsController < ApplicationController
        LEFT OUTER JOIN consign_slips AS cs ON c.consign_slip_id = cs.id
          LEFT OUTER JOIN customers AS cu ON cs.customer_id = cu.id
      LEFT OUTER JOIN sales AS s ON a.id = s.artwork_id
-     LEFT OUTER JOIN images AS i ON a.id = i.artwork_id
      WHERE s.id IS NULL
      AND   COALESCE(a.artist_id,0) between :artist_id_from and :artist_id_to
      AND   a.title like :title

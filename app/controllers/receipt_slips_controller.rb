@@ -16,7 +16,7 @@ class ReceiptSlipsController < ApplicationController
     @customer = Customer.select(:id, "name || '／' || kana AS customer").order(:kana)
     @staff = Staff.select(:id, :staff).order(:staff_no)
     @sort = Sort.select(:sort_key, :sort).all
-    gon.receipt_artwork_id = Purchase.includes({artwork: [:artist, :category, :technique, :size, :size_unit, :format]},:receipts, :sale_slip).order(:id)
+    gon.receipt_artwork_id = Sale.includes({artwork: [:artist, :category, :technique, :size, :size_unit, :format]},:receipts, :sale_slip).order(:id)
                                              .where(receipts: {id: nil})
                                              .pluck(:id, "artwork_no || '　　' || name || '／' || title AS artwork_no")
     gon.receipt_data = Receipt.includes(sale: [artwork: [:artist, :category, :technique, :size, :size_unit, :format]])

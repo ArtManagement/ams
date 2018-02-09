@@ -25,23 +25,7 @@ class PurchaseSlipsController < ApplicationController
                                 .where(purchase_slip_id: params[:id])
                                 .pluck_to_hash(:id, :artwork_id, :artwork_no, :name, :title, :category, "sizes.size", :size_unit, :format, :price,
                                                :retail_price, :wholesale_price, :note)
-    respond_to do |format|
-      format.html # show.html.erb
-      format.pdf do
-
-    # order情報を設定したThinReportを作成する
-       report = PurchaseSlipPDF.create @purchase_slip
-
-       # ブラウザでPDFを表示する
-       # disposition: "inline" によりダウンロードではなく表示させている
-         send_data report.generate,
-           filename:    "#{@purchase_slip.id}.pdf",
-           type:        "application/pdf",
-           disposition: "inline"
-        end
-    end
-#    redirect_to @purchase_slip
-    render action: :edit and return
+    render action: :edit
 
   end
 
@@ -122,8 +106,10 @@ class PurchaseSlipsController < ApplicationController
   end
 
   private
+
   def purchase_slip_params
     params.require(:purchase_slip).permit(:slip_no, :customer_id, :date, :slip_class_id, :scheduled_date,:tax_class_id,
                                           :tax_rate, :staff_id, :note, :sort1, :sort2, :sort3)
   end
+
 end

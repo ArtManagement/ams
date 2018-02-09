@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180204150503) do
+ActiveRecord::Schema.define(version: 20180209203858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,7 +183,7 @@ ActiveRecord::Schema.define(version: 20180204150503) do
     t.integer "trust"
     t.integer "consign"
     t.integer "payment"
-    t.integer "deposit"
+    t.integer "receipt"
     t.integer "frame"
     t.integer "exhibit"
   end

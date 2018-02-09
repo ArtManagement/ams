@@ -9,106 +9,166 @@
       </div>
     </div>
     <div class="col-lg-6">
+<p></p>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a href="#tab1" class="nav-link" data-toggle="tab">作品詳細</a>
+        </li>
+        <li class="nav-item">
+          <a href="#tab2" class="nav-link" data-toggle="tab">画像</a>
+        </li>
+        <li class="nav-item">
+          <a href="#tab3" class="nav-link" data-toggle="tab">委託履歴</a>
+        </li>
+        <li class="nav-item">
+          <a href="#tab4" class="nav-link" data-toggle="tab">額装</a>
+        </li>
+      </ul>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-6">
-      <div class="form-group row">
-        <%= f.label :artist_id, "作家：", :class => "col-form-label col-lg-3 text-default text-right" %>
-        <%= f.collection_select :artist_id, @artist, :id, :artist, {:include_blank => true},{:class => 'form-control col-lg-8 select-id'} %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :title, "タイトル：", :class => "col-form-label col-lg-3 text-default text-right" %>
-        <%= f.text_area :title, :class => "form-control col-lg-8", rows: 2 %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :category_id, "分類／技法：", :class => "col-form-label col-lg-3 text-default text-right" %>
-        <%= f.collection_select :category_id, @category, :id, :category, {:include_blank => true},{:class => 'form-control col-lg-3 select-id'} %>
-        <%= f.collection_select :technique_id, @technique, :id, :technique, {:include_blank => true},{:class => 'form-control col-lg-5 select-id'} %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :technique_etc, "技法（その他）：", :class => "col-form-label col-lg-3 text-default text-right" %>
-        <%= f.text_field :technique_etc, :class => 'form-control col-lg-8' %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :size_unit_id, "号数：", :class => "col-form-label col-lg-3 text-default text-right" %>
-        <%= f.collection_select :size_unit_id, @size_unit, :id, :size_unit, {:include_blank => true}, {:class => "form-control col-lg-2 select-id"} %>
-        <%= f.collection_select :size_id, @size, :id, :size, {:include_blank => true},{:class => "form-control col-lg-3 select-id"} %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :edition, "エディション：", :class => "col-form-label col-lg-3 text-default text-right" %>
-        <%= f.text_field :edition, :class => "form-control col-lg-3 text-right" %>
-        <%= f.text_field :edition_no, :class => "form-control col-lg-2 text-right" %>
-        <%= f.label :edition_limit, "／", :class => "col-form-label col-lg-1 text-right" %>
-        <%= f.text_field :edition_limit, :class => "form-control col-lg-2 text-right" %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :production_year, "製作年：", :class => "col-form-label col-lg-3 text-default text-right" %>
-        <%= f.text_field :production_year, :class => "form-control col-lg-2 text-right" %>
-        <%= f.label :raisonne, "レゾネ：", :class => "col-form-label col-lg-3 text-default text-right" %>
-        <%= f.text_field :raisonne, :class => "form-control col-lg-3" %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :motif_id, "題材：", :class => "col-form-label col-lg-3 text-default text-right" %>
-        <%= f.collection_select :motif_id, @motif, :id, :format, {:include_blank => true},{:class => "form-control col-lg-3 select-id"} %>
-        <%= f.label :format_id, "体裁：", :class => "col-form-label col-lg-2 text-default text-right" %>
-        <%= f.collection_select :format_id, @format, :id, :format, {:include_blank => true},{:class => "form-control col-lg-3 select-id"} %>
+    <div class="col-lg-12">
+      <div class="tab-content">
+        <div id="tab1" class="tab-pane active">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group row">
+                <%= f.label :artist_id, "作家：", :class => "col-form-label col-lg-3 text-default text-right" %>
+                <%= f.collection_select :artist_id, @artist, :id, :artist, {:include_blank => true},{:class => 'form-control col-lg-8 select-id'} %>
+              </div>
+              <div class="form-group row">
+                <%= f.label :title, "タイトル：", :class => "col-form-label col-lg-3 text-default text-right" %>
+                <%= f.text_area :title, :class => "form-control col-lg-8", rows: 2 %>
+              </div>
+              <div class="form-group row">
+                <%= f.label :category_id, "分類／技法：", :class => "col-form-label col-lg-3 text-default text-right" %>
+                <%= f.collection_select :category_id, @category, :id, :category, {:include_blank => true},{:class => 'form-control col-lg-3 select-id'} %>
+                <%= f.collection_select :technique_id, @technique, :id, :technique, {:include_blank => true},{:class => 'form-control col-lg-5 select-id'} %>
+              </div>
+              <div class="form-group row">
+                <%= f.label :technique_etc, "技法（その他）：", :class => "col-form-label col-lg-3 text-default text-right" %>
+                <%= f.text_field :technique_etc, :class => 'form-control col-lg-8' %>
+              </div>
+              <div class="form-group row">
+                <%= f.label :size_unit_id, "号数：", :class => "col-form-label col-lg-3 text-default text-right" %>
+                <%= f.collection_select :size_unit_id, @size_unit, :id, :size_unit, {:include_blank => true}, {:class => "form-control col-lg-2 select-id"} %>
+                <%= f.collection_select :size_id, @size, :id, :size, {:include_blank => true},{:class => "form-control col-lg-3 select-id"} %>
+              </div>
+              <div class="form-group row">
+                <%= f.label :edition, "エディション：", :class => "col-form-label col-lg-3 text-default text-right" %>
+                <%= f.text_field :edition, :class => "form-control col-lg-3 text-right" %>
+                <%= f.text_field :edition_no, :class => "form-control col-lg-2 text-right" %>
+                <%= f.label :edition_limit, "／", :class => "col-form-label col-lg-1 text-right" %>
+                <%= f.text_field :edition_limit, :class => "form-control col-lg-2 text-right" %>
+              </div>
+              <div class="form-group row">
+                <%= f.label :production_year, "製作年：", :class => "col-form-label col-lg-3 text-default text-right" %>
+                <%= f.text_field :production_year, :class => "form-control col-lg-2 text-right" %>
+                <%= f.label :raisonne, "レゾネ：", :class => "col-form-label col-lg-3 text-default text-right" %>
+                <%= f.text_field :raisonne, :class => "form-control col-lg-3" %>
+              </div>
+              <div class="form-group row">
+                <%= f.label :motif_id, "題材：", :class => "col-form-label col-lg-3 text-default text-right" %>
+                <%= f.collection_select :motif_id, @motif, :id, :format, {:include_blank => true},{:class => "form-control col-lg-3 select-id"} %>
+                <%= f.label :format_id, "体裁：", :class => "col-form-label col-lg-2 text-default text-right" %>
+                <%= f.collection_select :format_id, @format, :id, :format, {:include_blank => true},{:class => "form-control col-lg-3 select-id"} %>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group row">
+                <%= f.label :size_title, "　　　　　　　　　　　　高さ　　　　　幅　　　　　奥行　　　　　単位", :class => "col-form-label col-lg-12 text-default" %>
+                <%= f.label :height, "画面サイズ：", :class => "col-form-label col-lg-3 text-default text-right" %>
+                <%= f.text_field :height, :class => "form-control col-lg-2 text-right" %>
+                <%= f.text_field :width, :class => "form-control col-lg-2 text-right" %>
+                <%= f.text_field :depth, :class => "form-control col-lg-2 text-right" %>
+                <%= f.select :unit, [["",""],["cm", "cm"], ["mm", "mm"],["in.", "in."]], {}, {:class => "form-control col-lg-2 select-id"} %>
+                <%= f.label :frame_height, "体裁サイズ：", :class => "col-form-label col-lg-3 text-default text-right" %>
+                <%= f.text_field :frame_height, :class => "form-control col-lg-2 text-right" %>
+                <%= f.text_field :frame_width, :class => "form-control col-lg-2 text-right" %>
+                <%= f.text_field :frame_depth, :class => "form-control col-lg-2 text-right" %>
+                <%= f.select :frame_unit, [["",""],["cm", "cm"], ["mm", "mm"],["in.", "in."]], {}, {:class => "form-control col-lg-2 select-id"} %>
+              </div>
+             <div class="form-group row">
+                <%= f.label :size_etc, "サイズ：", :class => "col-form-label col-lg-3 text-default text-right" %>
+                <%= f.text_field :size_etc, :class => "form-control col-lg-8" %>
+              </div>
+              <div class="form-group row">
+                <%= f.label :sign_etc, "サイン等：", :class => "col-form-label col-lg-3 text-default text-right" %>
+                <%= f.check_box :sign %>
+                <%= f.label :sign, "サイン", :class => "checkbox-inline col-lg-2" %>
+                <%= f.check_box :signature %>
+                <%= f.label :signature, "落款", :class => "checkbox-inline col-lg-2" %>
+                <%= f.check_box :seal %>
+                <%= f.label :seal, "印", :class => "checkbox-inline col-lg-2" %>
+                <%= f.check_box :co_seal %>
+                <%= f.label :co_seal, "共シール", :class => "checkbox-inline col-lg-2" %>
+                <%= f.check_box :co_box %>
+                <%= f.label :co_box, "共箱", :class => "checkbox-inline col-lg-2" %>
+                <%= f.check_box :certificate %>
+                <%= f.label :certificate, "鑑定書", :class => "checkbox-inline col-lg-2" %>
+              </div>
+              <div class="form-group row">
+                <%= f.label :retail_price, "上代：", :class => "col-form-label col-lg-3 text-default text-right" %>
+                <%= f.text_field :retail_price, data: {autonumeric: {mDec: 0}}, :class => "form-control col-lg-3 text-right" %>
+                <%= f.label :wholesale_price, "下代：", :class => "col-form-label col-lg-2 text-default text-right" %>
+                <%= f.text_field :wholesale_price, data: {autonumeric: {mDec: 0}}, :class => "form-control col-lg-3 text-right" %>
+              </div>
+              <div class="form-group row">
+                <%= f.label :note, "備考：", :class => "col-form-label col-lg-3 text-default text-right" %>
+                <%= f.text_area :note , :class => "form-control col-lg-8", rows:3 %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="tab2" class="tab-pane">
+          <div class="row">
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-3">
+              <div class="form-group row">
+                <%= f.label :image1, "1." %>
+                <%= image_tag @artwork.image1.thumb.url if @artwork.image1? %>
+              </div>
+              <div class="form-group row">
+                <%= f.file_field :image1 %>
+                <%= f.hidden_field :image1_cache %>
+              </div>
+            </div>
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-3">
+              <div class="form-group row">
+                <%= f.label :image2, "2." %>
+                <%= image_tag @artwork.image2.thumb.url if @artwork.image2? %>
+              </div>
+              <div class="form-group row">
+                <%= f.file_field :image2 %>
+                <%= f.hidden_field :image2_cache %>
+              </div>
+            </div>
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-3">
+              <div class="form-group row">
+                <%= f.label :image3, "3." %>
+                <%= image_tag @artwork.image3.thumb.url if @artwork.image3? %>
+              </div>
+              <div class="form-group row">
+                <%= f.file_field :image3 %>
+                <%= f.hidden_field :image3_cache %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="tab3" class="tab-pane">
+        </div>
+        <div id="tab4" class="tab-pane">
+        </div>
       </div>
     </div>
-    <div class="col-lg-6">
-      <div class="form-group row">
-        <%= f.label :size_title, "　　　　　　　　　　　　高さ　　　　　幅　　　　　奥行　　　　　単位", :class => "col-form-label col-lg-12 text-default" %>
-        <%= f.label :height, "画面サイズ：", :class => "col-form-label col-lg-3 text-default text-right" %>
-        <%= f.text_field :height, :class => "form-control col-lg-2 text-right" %>
-        <%= f.text_field :width, :class => "form-control col-lg-2 text-right" %>
-        <%= f.text_field :depth, :class => "form-control col-lg-2 text-right" %>
-        <%= f.select :unit, [["",""],["cm", "cm"], ["mm", "mm"],["in.", "in."]], {}, {:class => "form-control col-lg-2 select-id"} %>
-        <%= f.label :frame_height, "体裁サイズ：", :class => "col-form-label col-lg-3 text-default text-right" %>
-        <%= f.text_field :frame_height, :class => "form-control col-lg-2 text-right" %>
-        <%= f.text_field :frame_width, :class => "form-control col-lg-2 text-right" %>
-        <%= f.text_field :frame_depth, :class => "form-control col-lg-2 text-right" %>
-        <%= f.select :frame_unit, [["",""],["cm", "cm"], ["mm", "mm"],["in.", "in."]], {}, {:class => "form-control col-lg-2 select-id"} %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :size_etc, "サイズ：", :class => "col-form-label col-lg-3 text-default text-right" %>
-        <%= f.text_field :size_etc, :class => "form-control col-lg-8" %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :sign_etc, "サイン等：", :class => "col-form-label col-lg-3 text-default text-right" %>
-        <%= f.check_box :sign %>
-        <%= f.label :sign, "サイン", :class => "checkbox-inline col-lg-2" %>
-        <%= f.check_box :signature %>
-        <%= f.label :signature, "落款", :class => "checkbox-inline col-lg-2" %>
-        <%= f.check_box :seal %>
-        <%= f.label :seal, "印", :class => "checkbox-inline col-lg-2" %>
-        <%= f.check_box :co_seal %>
-        <%= f.label :co_seal, "共シール", :class => "checkbox-inline col-lg-2" %>
-        <%= f.check_box :co_box %>
-        <%= f.label :co_box, "共箱", :class => "checkbox-inline col-lg-2" %>
-        <%= f.check_box :certificate %>
-        <%= f.label :certificate, "鑑定書", :class => "checkbox-inline col-lg-2" %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :retail_price, "上代：", :class => "col-form-label col-lg-3 text-default text-right" %>
-        <%= f.text_field :retail_price, data: {autonumeric: {mDec: 0}}, :class => "form-control col-lg-3 text-right" %>
-        <%= f.label :wholesale_price, "下代：", :class => "col-form-label col-lg-2 text-default text-right" %>
-        <%= f.text_field :wholesale_price, data: {autonumeric: {mDec: 0}}, :class => "form-control col-lg-3 text-right" %>
-      </div>
-      <div class="form-group row">
-        <%= f.label :note, "備考：", :class => "col-form-label col-lg-3 text-default text-right" %>
-        <%= f.text_area :note , :class => "form-control col-lg-8", rows:3 %>
-      </div>
+    <div class="col-lg-8">
     </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-5">
-    </div>
-    <div class="col-lg-7">
-      <div class="toolbar">
-        <%= f.submit "更新", data: { disable_with: "更新中..." } ,:class => "btn btn-default col-lg-2" %>
-        <input class="btn btn-default col-lg-2" id="purchase_image" type="button" value="画像">
-        <input class="btn btn-default col-lg-2" id="purchase_close" type="button" value="閉じる" onClick="window.close()">
-      </div>
+    <div class="col-lg-4">
+        <%= f.submit "　　更　新　　", data: { disable_with: "更新中..." } ,:class => "btn btn-default" %>
+        <input class="btn btn-default" id="purchase_close" type="button" value="　　閉じる　　" onClick="window.close()">
     </div>
   </div>
 </div>

@@ -61,7 +61,7 @@ class ArtworksController < ApplicationController
                                     :production_year,:raisonne,:motif_id,:format_id,:heigｈｔ,:width,
                                     :depth,:frame_height,:frame_width,:frame_depth,:frame_unit,
                                     :sign,:signature,:seal,:co_box,:co_seal,:certificate,
-                                    :retail_price,:wholesale_price,:note)
+                                    :retail_price,:wholesale_price,:note,:image1,:image2,:image3,:image4)
   end
 
 end

@@ -9,7 +9,7 @@ class CreateCounters < ActiveRecord::Migration[5.0]
       t.integer :trust
       t.integer :consign
       t.integer :payment
-      t.integer :deposit
+      t.integer :receipt
       t.integer :frame
       t.integer :exhibit
     end
