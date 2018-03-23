@@ -5,16 +5,17 @@ $ ->
   purchase_data = gon.purchase_data
   purchase_artwork_id = gon.purchase_artwork_id
   $('#purchase_slip').jqGrid
-    styleUI: 'Bootstrap'
+    styleUI: 'Bootstrap4'
+    iconSet: 'fontAwesome'
     datatype: 'local'
     data: purchase_data
     editurl: 'clientArray'
     colNames: [ '', '作品No', '作家名', 'タイトル', 'ＥＤ・号数', '分類・技法', '体裁', '状況', '仕入価格', '上代', '下代', '', '備考', 'id', '作品ID']
-    colModel: [ { name:'actions', width: 40, formatter: "actions", formatoptions: {keys: false,editbutton: false, delbutton: true, delOptions: {}}}
+    colModel: [ { name:'actions', width: 60, formatter: "actions", formatoptions: {keys: false,editbutton: false, delbutton: true, delOptions: {}}}
                 { name:'artwork_no', width: 100, editable: true, sortable: false, edittype: "select",
                 editoptions: { value: purchase_artwork_id , dataInit: (artwork_id) -> $(artwork_id).select2 theme: "bootstrap", dropdownAutoWidth: true,  width: "1080px" } }
                 { name:'name', width: 180, sortable: false }
-                { name:'title', width: 260, sortable: false }
+                { name:'title', width: 240, sortable: false }
                 { name:'size', width: 100, sortable: false }
                 { name:'category', width: 160, sortable: false }
                 { name:'format', width: 80, sortable: false }
@@ -97,7 +98,7 @@ $ ->
 
 # 新規伝票ボタン
   $('#purchase_slip_new').click ->
-    location.href = '/purchase_slips/new'
+    location.href = '/purchase_slips/new/'
 
 # 作品登録ボタン
   $('#purchase_slip_artwork').click ->

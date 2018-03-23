@@ -17,14 +17,14 @@
 #= require jquery3
 #= require popper
 #= require bootstrap-sprockets
+#= require trirand/i18n/grid.locale-ja
+#= require trirand/src/jquery.jqGrid
 #= require moment
 #= require bootstrap-datetimepicker
 #= require moment/ja
 #= require select2
 #= require select2_locale_"ja"
 #= require autonumeric
-#= require trirand/src/jquery.jqGrid
-#= require trirand/i18n/grid.locale-ja
 #= require_tree .
 
 $ ->

@@ -4,10 +4,11 @@
 $ ->
   inventory_list_data = gon.inventory_list_data
   $('#inventory_list').jqGrid
-    styleUI: 'Bootstrap'
+    styleUI: 'Bootstrap4'
     datatype: 'local'
     data: inventory_list_data
     editurl: 'clientArray'
+    iconSet: 'fontAwesome'
     colNames: ['作品No', '作家', 'タイトル', 'ＥＤ・号数', '分類・技法', '体裁', '画像', '状況', '委託先・倉庫', '上代', '下代','コスト','消費税', '備考', '作品ID']
     colModel: [ { name:'artwork_no', width: 85, sortable: false}
                 { name:'artist', width: 160, sortable: false }

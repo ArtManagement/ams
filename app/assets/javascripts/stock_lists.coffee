@@ -4,7 +4,8 @@
 $ ->
   stock_list_data = gon.stock_list_data
   $('#stock_list').jqGrid
-    styleUI: 'Bootstrap'
+    styleUI: 'Bootstrap4'
+    iconSet: 'fontAwesome'
     datatype: 'local'
     data: stock_list_data
     editurl: 'clientArray'

@@ -6,16 +6,17 @@ receipt_artwork_id = gon.receipt_artwork_id
 
 $ ->
   $('#receipt_slip').jqGrid
-    styleUI: 'Bootstrap'
+    styleUI: 'Bootstrap4'
+    iconSet: 'fontAwesome'
     datatype: 'local'
     data: receipt_data
     editurl: 'clientArray'
     colNames: [ '', '作品No', '作家名', 'タイトル', 'ＥＤ・号数', '分類・技法', '売掛金額', '状況', '入金金額', '売上金額', '備考', 'id', '作品id']
-    colModel: [ { name:'actions', width: 40, formatter: "actions", formatoptions: {keys: false,editbutton: false, delbutton: true, delOptions: {}}}
+    colModel: [ { name:'actions', width: 60, formatter: "actions", formatoptions: {keys: false,editbutton: false, delbutton: true, delOptions: {}}}
                 { name:'artwork_no', width: 100, editable: true, sortable: false, edittype: "select",
                 editoptions: { value: receipt_artwork_id , dataInit: (artwork_id) -> $(artwork_id).select2 theme: "bootstrap", dropdownAutoWidth: true,  width: "1080px" } }
                 { name:'name', width: 180, sortable: false }
-                { name:'title', width: 260, sortable: false }
+                { name:'title', width: 240, sortable: false }
                 { name:'size', width: 100, sortable: false }
                 { name:'category', width: 140, sortable: false }
                 { name:'receivable_amount', width: 100, sortable: false, align : 'right', formatter: 'number', summaryType: 'sum',

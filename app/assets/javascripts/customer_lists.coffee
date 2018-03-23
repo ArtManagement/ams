@@ -1,11 +1,11 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-customer_list_data = gon.customer_list_data
-
 $ ->
+  customer_list_data = gon.customer_list_data
   $('#customer_list').jqGrid
-    styleUI: 'Bootstrap'
+    styleUI: 'Bootstrap4'
+    iconSet: 'fontAwesome'
     datatype: 'local'
     data: customer_list_data
     editurl: 'clientArray'

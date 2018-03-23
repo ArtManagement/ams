@@ -5,7 +5,8 @@ payment_list_data = gon.payment_list_data
 
 $ ->
   $('#payment_list').jqGrid
-    styleUI: 'Bootstrap'
+    styleUI: 'Bootstrap4'
+    iconSet: 'fontAwesome'
     datatype: 'local'
     data: payment_list_data
     editurl: 'clientArray'

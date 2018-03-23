@@ -5,45 +5,45 @@
       <div class="col-lg-4">
 <p></p>
         <div class="form-group row">
-          <%= label_tag :stock_lists, '作家：', :class => 'col-form-label col-lg-3 text-right text-default' %>
+          <%= label_tag :stock_lists, '作家：', :class => 'col-form-label col-lg-3 text-right text-secondary' %>
           <%= select_tag :stock_lists_artist_id, options_from_collection_for_select(@artist, :id, :artist), {:class => 'form-control col-lg-9 select-id', :include_blank => true} %>
       </div>
       </div>
       <div class="col-lg-6">
 <p></p>
         <div class="form-group row">
-          <%= label_tag :stock_lists, '委託先：', :class => 'col-form-label col-lg-2 text-right text-default' %>
+          <%= label_tag :stock_lists, '委託先：', :class => 'col-form-label col-lg-2 text-right text-secondary' %>
           <%= select_tag :stock_lists_customer_id, options_from_collection_for_select(@customer, :id, :customer), {:class => 'form-control col-lg-10 select-id', :include_blank => true} %>
         </div>
       </div>
       <div class="col-lg-2">
 <p></p>
         <div class="form-group row">
-          <%= label_tag :stock_lists, '状況：', :class => 'col-form-label col-lg-6 text-right text-default' %>
+          <%= label_tag :stock_lists, '状況：', :class => 'col-form-label col-lg-6 text-right text-secondary' %>
           <%= select_tag :stock_lists_status_id, options_for_select([['', 0],['仕入', 1],['受託', 2],['委託',3]]), {:class => 'form-control col-lg-6 select-id'} %>
         </div>
       </div>
       <div class="col-lg-4">
         <div class="form-group row">
-          <%= label_tag :stock_lists, 'タイトル：', :class => 'col-form-label col-lg-3 text-right text-default' %>
+          <%= label_tag :stock_lists, 'タイトル：', :class => 'col-form-label col-lg-3 text-right text-secondary' %>
           <%= text_field :stock_lists, :title, :class => 'form-control col-lg-9' %>
         </div>
         <div class="form-group row">
-          <%= label_tag :stock_lists, '分類技法：', :class => 'col-form-label col-lg-3 text-right text-default' %>
+          <%= label_tag :stock_lists, '分類技法：', :class => 'col-form-label col-lg-3 text-right text-secondary' %>
           <%= select_tag :stock_lists_category_id, options_from_collection_for_select(@category, :id, :category), {:class => 'form-control col-lg-4 select-id', :include_blank => true} %>
           <%= select_tag :stock_lists_technique_id, options_from_collection_for_select(@technique, :id, :technique), {:class => 'form-control col-lg-5 select-id', :include_blank => true} %>
         </div>
       </div>
       <div class="col-lg-4">
         <div class="form-group row">
-          <%= label_tag :stock_lists, '倉庫：', :class => 'col-form-label col-lg-3 text-right text-default' %>
+          <%= label_tag :stock_lists, '倉庫：', :class => 'col-form-label col-lg-3 text-right text-secondary' %>
           <%= select_tag :stock_lists_warehouse_id, options_from_collection_for_select(@warehouse, :id, :warehouse), {:class => 'form-control col-lg-8 select-id', :include_blank => true} %>
         </div>
         <div class="form-group row">
-          <%= label_tag :stock_lists, '体裁：', :class => 'col-form-label col-lg-3 text-right text-default' %>
+          <%= label_tag :stock_lists, '体裁：', :class => 'col-form-label col-lg-3 text-right text-secondary' %>
           <%= select_tag :stock_lists_format_id, options_from_collection_for_select(@format, :id, :format), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
-          <%= label_tag :stock_lists, ':', :class => 'col-form-label col-lg-2 text-right text-default' %>
-          <input class="btn btn-default col-lg-3 col-lg-offset-1" id="stock_lists_search" type="button" value="検索">
+          <%= label_tag :stock_lists, ':', :class => 'col-form-label col-lg-2 text-right text-secondary' %>
+          <input class="btn btn-secondary col-lg-3 col-lg-offset-1" id="stock_lists_search" type="button" value="検索">
         </div>
 
       </div>
@@ -52,11 +52,11 @@
         <div class="form-group row">
           <table id = "stock_list_sum" class="table table-sm table-bordered">
             <thead>
-              <tr class="table-default">
-                <th class="text-default">作品数</th>
-                <th class="text-default">合計　　　</th>
-                <th class="text-default">消費税　</th>
-                <th class="text-default">税込合計　</th>
+              <tr class="table-secondary">
+                <th class="text-secondary">作品数</th>
+                <th class="text-secondary">合計　　　</th>
+                <th class="text-secondary">消費税　</th>
+                <th class="text-secondary">税込合計　</th>
               </tr>
             </thead>
             <tbody>
@@ -76,7 +76,7 @@
       <div class="col-lg-4">
 <p></P>
         <div class="form-group row">
-          <%= label_tag :stock_lists,'並び替え：', :class => 'col-form-label col-lg-3 text-right text-default' %>
+          <%= label_tag :stock_lists,'並び替え：', :class => 'col-form-label col-lg-3 text-right text-secondary' %>
           <%= select_tag :sort1, options_from_collection_for_select(@sort, :sort_key, :sort), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
           <%= select_tag :sort2, options_from_collection_for_select(@sort, :sort_key, :sort), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
           <%= select_tag :sort3, options_from_collection_for_select(@sort, :sort_key, :sort), {:class => 'form-control col-lg-3 select-id', :include_blank => true} %>
@@ -86,10 +86,10 @@
       </div>
       <div class="col-lg-5">
 <p></p>
-        <input class="btn btn-default" id="stock_list_seach" type="button" value="　検索条件　">
-        <input class="btn btn-default" id="stock_list_artwork" type="button" value="　作品詳細　">
-        <input class="btn btn-default" id="purcahse_list_print" type="button" value="　印　刷　">
-        <input class="btn btn-default" id="stock_list_close" type="button" value="　閉じる　" onClick="window.close()">
+        <input class="btn btn-secondary" id="stock_list_seach" type="button" value="　検索条件　">
+        <input class="btn btn-secondary" id="stock_list_artwork" type="button" value="　作品詳細　">
+        <input class="btn btn-secondary" id="purcahse_list_print" type="button" value="　印　刷　">
+        <input class="btn btn-secondary" id="stock_list_close" type="button" value="　閉じる　" onClick="window.close()">
       </div>
     </div>
   </div>

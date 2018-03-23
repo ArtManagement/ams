@@ -4,7 +4,8 @@
 $ ->
   payable_list_data = gon.payable_list_data
   $('#payable_list').jqGrid
-    styleUI: 'Bootstrap'
+    styleUI: 'Bootstrap4'
+    iconSet: 'fontAwesome'
     datatype: 'local'
     data: payable_list_data
     editurl: 'clientArray'

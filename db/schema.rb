@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180209203858) do
+ActiveRecord::Schema.define(version: 20180322173445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -260,6 +260,35 @@ ActiveRecord::Schema.define(version: 20180209203858) do
     t.string  "format_eng"
     t.integer "sort"
     t.boolean "usable"
+  end
+
+  create_table "frame_slips", force: :cascade do |t|
+    t.string   "slip_no"
+    t.datetime "date"
+    t.integer  "customer_id"
+    t.datetime "scheduled_date"
+    t.integer  "tax_class_id"
+    t.float    "tax_rate"
+    t.integer  "staff_id"
+    t.text     "note"
+    t.integer  "company_id"
+    t.integer  "user_id"
+    t.string   "sort1"
+    t.string   "sort2"
+    t.string   "sort3"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "frames", force: :cascade do |t|
+    t.integer  "frame_slip_id"
+    t.integer  "artwork_id"
+    t.integer  "frame_class_id"
+    t.integer  "price"
+    t.integer  "specification"
+    t.text     "note"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "images", force: :cascade do |t|

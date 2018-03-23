@@ -102,6 +102,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :customer_lists do
+    collection do
+      get :search
+    end
+  end
+
   resources :purchases do
     resources :artworks
   end
@@ -114,6 +120,7 @@ Rails.application.routes.draw do
     collection do
       get :artworkGet
       get :priceSet
+      get :print
     end
   end
 

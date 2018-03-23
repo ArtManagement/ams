@@ -25,8 +25,35 @@ class PurchaseSlipsController < ApplicationController
                                 .where(purchase_slip_id: params[:id])
                                 .pluck_to_hash(:id, :artwork_id, :artwork_no, :name, :title, :category, "sizes.size", :size_unit, :format, :price,
                                                :retail_price, :wholesale_price, :note)
-    render action: :edit
+#    render action: :edit
 
+    respond_to do |format|
+      format.html # show.html.erb
+      format.pdf do
+
+            # Thin ReportsでPDFを作成
+            # 先ほどEditorで作ったtlfファイルを読み込む
+            #report = ThinReports::Report.new(layout: "#{Rails.root}/app/pdfs/purchase_slip.tlf")
+        report = Thinreports::Report.new layout: File.join(Rails.root, 'app', 'pdfs', 'purchase_slip.tlf')
+            # 1ページ目を開始
+        report.start_new_page
+
+            ### 追加箇所 開始 ###
+            # 注文番号と注文日の値を設定
+            # itemメソッドでtlfファイルのIDを指定し、
+            # valueメソッドで値を設定します
+        report.page.item(:slip_no).value(@purchase_slip.slip_no)
+        report.page.item(:customer).value(@purchase_slip.customer_id)
+            ### 追加箇所 終了 ###
+
+            # ブラウザでPDFを表示する
+            # disposition: "inline" によりダウンロードではなく表示させている
+        send_data report.generate,
+              filename:    "#{@purchase_slip.id}.pdf",
+              type:        "application/pdf",
+              disposition: "inline"
+      end
+    end
   end
 
   def new
@@ -105,6 +132,11 @@ class PurchaseSlipsController < ApplicationController
     end
   end
 
+  def print
+
+
+  end
+
   private
 
   def purchase_slip_params
@@ -112,4 +144,23 @@ class PurchaseSlipsController < ApplicationController
                                           :tax_rate, :staff_id, :note, :sort1, :sort2, :sort3)
   end
 
+  def render_purchase_slip(purchases)
+
+
+        report = Thinreports::Report.new layout: File.join(Rails.root, 'app', 'reports', 'purchase_slip.tlf')
+
+        purchases.each do |purchase|
+          report.list.add_row do |row|
+            row.values artwork_no: purchase.artwork_no,
+                       artist: purchase.artist,
+                       title: purchase.title,
+                       price: purchase.price
+            row.item(:name).style(:color, 'red') unless task.done?
+          end
+        end
+
+        send_data report.generate, filename: 'purchase_slips.pdf',
+                                   type: 'application/pdf',
+                                   disposition: 'attachment'
+      end
 end

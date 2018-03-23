@@ -5,16 +5,17 @@ purchase_cancel_data = gon.purchase_cancel_data
 purchase_cancel_artwork_id = gon.purchase_cancel_artwork_id
 $ ->
   $('#purchase_cancel_slip').jqGrid
-    styleUI: 'Bootstrap'
+    styleUI: 'Bootstrap4'
+    iconSet: 'fontAwesome'
     datatype: 'local'
     data: purchase_cancel_data
     editurl: 'clientArray'
     colNames: [ '', '作品No', '作家名', 'タイトル', 'ＥＤ・号数', '分類・技法', '体裁', '状況', '仕入価格', '備考', 'id', '仕入ID','作品ID']
-    colModel: [ { name:'actions', width: 40, formatter: "actions", formatoptions: {keys: true, delbutton : true, delOptions: {}}}
+    colModel: [ { name:'actions', width: 60, formatter: "actions", formatoptions: {keys: false, editbutton: false, delbutton: true, delOptions: {}}}
                 { name:'artwork_no', width: 100, editable: true, sortable: false, edittype: "select",
                 editoptions: { value: purchase_cancel_artwork_id , dataInit: (artwork_id) -> $(artwork_id).select2 theme: "bootstrap", dropdownAutoWidth: true,  width: "1080px" } }
                 { name:'name', width: 180, sortable: false }
-                { name:'title', width: 260, sortable: false }
+                { name:'title', width: 240, sortable: false }
                 { name:'size', width: 100, sortable: false }
                 { name:'category', width: 160, sortable: false }
                 { name:'format', width: 80, sortable: false }

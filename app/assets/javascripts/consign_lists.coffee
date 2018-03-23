@@ -5,7 +5,8 @@ consign_list_data = gon.consign_list_data
 
 $ ->
   $('#consign_list').jqGrid
-    styleUI: 'Bootstrap'
+    styleUI: 'Bootstrap4'
+    iconSet: 'fontAwesome'
     datatype: 'local'
     data: consign_list_data
     editurl: 'clientArray'

@@ -5,7 +5,8 @@ receipt_list_data = gon.receipt_list_data
 
 $ ->
   $('#receipt_list').jqGrid
-    styleUI: 'Bootstrap'
+    styleUI: 'Bootstrap4'
+    iconSet: 'fontAwesome'
     datatype: 'local'
     data: receipt_list_data
     editurl: 'clientArray'

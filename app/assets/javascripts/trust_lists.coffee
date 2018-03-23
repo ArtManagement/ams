@@ -5,7 +5,8 @@ trust_list_data = gon.trust_list_data
 
 $ ->
   $('#trust_list').jqGrid
-    styleUI: 'Bootstrap'
+    styleUI: 'Bootstrap4'
+    iconSet: 'fontAwesome'
     datatype: 'local'
     data: trust_list_data
     editurl: 'clientArray'

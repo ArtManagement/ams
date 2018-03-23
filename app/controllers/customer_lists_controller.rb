@@ -1,6 +1,12 @@
 class CustomerListsController < ApplicationController
   def index
     @sort = Sort.select(:sort_key, :sort).all
+    @customer = Customer.select(:id, "name || '／' || kana AS customer").order(:kana)
+    @artist = Artist.select(:id, "name || '／' || kana AS artist").all.order(:kana)
+    @category = Category.select(:id, :category).all.order(:id)
+    @technique = Technique.select(:id, :technique).all.order(:id)
+    @format = Format.select(:id, :format).all.order(:id)
+    @warehouse = Warehouse.select(:id, :warehouse).all.order(:id)
     sql =
     "SELECT
       cu.id AS id,
@@ -21,6 +27,7 @@ class CustomerListsController < ApplicationController
       ON cu.customer_class_id = cc.id
       LEFT OUTER JOIN prefectures AS pr
       ON cu.prefecture_id = pr.id"
-    gon.customer_list_data =  Customer.find_by_sql([sql])
+    gon.costomer_list_data =  Customer.find_by_sql([sql])
+
   end
 end

@@ -1,0 +1,2 @@
+class FrameSlip < ApplicationRecord
+end

@@ -14,11 +14,11 @@
  *= require_self
  */
  $font-size-base: .875rem !default;
- @import "bootstrap";
  @import "jquery-ui";
- @import "trirand/ui.jqgrid-bootstrap4";
+ @import "bootstrap";
  @import "font-awesome-sprockets";
  @import "font-awesome";
+ @import "trirand/ui.jqgrid-bootstrap4";
  @import "bootstrap-datetimepicker";
  @import "select2";
  @import "select2-bootstrap";

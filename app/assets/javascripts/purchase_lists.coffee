@@ -5,7 +5,8 @@ purchase_list_data = gon.purchase_list_data
 
 $ ->
   $('#purchase_list').jqGrid
-    styleUI: 'Bootstrap'
+    styleUI: 'Bootstrap4'
+    iconSet: 'fontAwesome'
     datatype: 'local'
     data: purchase_list_data
     editurl: 'clientArray'

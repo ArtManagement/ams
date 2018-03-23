@@ -5,9 +5,7 @@ $ ->
 
 # 新規ボタン
   $('#purchase_new').click ->
-#    slip_id = ('#purchase_slip_id').val()
-    param = location.search
-    location.href = '/purchases/new' + param
+    location.href = '/purchases/new/?slip_id='+ $("#purchase_purchase_slip_id").val()
 
 # 仕入No変更
   $('#purchase_id').on ->

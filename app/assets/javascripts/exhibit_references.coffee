@@ -4,13 +4,13 @@
 $ ->
   exhibit_reference = gon.exhibit_reference
   $('#exhibit_reference').jqGrid
-    styleUI: 'Bootstrap'
+    styleUI: 'Bootstrap4'
+    iconSet: 'fontAwesome'
     datatype: 'local'
     data: exhibit_reference
     editurl: 'clientArray'
-    colNames: ['', '作品No', '作家', 'タイトル', 'ＥＤ・号数', '分類・技法', '体裁', '原価', '消費税', '作品ID']
-    colModel: [ { name:'actions', width: 40, formatter: "actions", formatoptions: {keys: false,editbutton: false, delbutton: true, delOptions: {}}}
-                { name:'artwork_no', width: 85, sortable: false}
+    colNames: ['作品No', '作家', 'タイトル', 'ＥＤ・号数', '分類・技法', '体裁', '原価', '消費税', '作品ID']
+    colModel: [ { name:'artwork_no', width: 85, sortable: false}
                 { name:'artist', width: 140, sortable: false }
                 { name:'title', width: 220, sortable: false }
                 { name:'size', width: 100, sortable: false }
@@ -25,7 +25,7 @@ $ ->
     autoencode: true
     cellEdit: true
     cellsubmit: 'clientArray'
-    width: 970
+    width: 1070
     height: 385
     shrinkToFit: false
     rowNum: 200

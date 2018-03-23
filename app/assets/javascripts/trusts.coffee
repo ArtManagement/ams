@@ -5,9 +5,7 @@ $ ->
 
 # 新規ボタン
   $('#trust_new').click ->
-#    slip_id = ('#trust_slip_id').val()
-    param = location.search
-    location.href = '/trusts/new' + param
+    location.href = '/trusts/new/?slip_id='+ $("#trust_trust_slip_id").val()
 
 # 仕入No変更
   $('#trust_id').on ->
