@@ -29,7 +29,7 @@ $ ->
     width: 1140
     height: 475
     shrinkToFit: false
-    rowNum: 100000
+    rowNum: 500
     loadonce: true
     viewrecords: true
     caption:''
