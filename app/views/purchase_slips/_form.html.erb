@@ -83,7 +83,6 @@
       <input class="btn btn-danger" id="purchase_slip_new" type="button" value="　新規伝票　">
       <%= f.submit "　登録更新　", data: { disable_with: "登録中..." } ,:class => "btn btn-danger" %>
       <input class="btn btn-danger" id="purchase_slip_artwork" type="button" value="　作品登録　">
-      <%= link_to "　印　刷　", purchase_slip_path(@purchase_slip,format: 'pdf') ,:class => "btn btn-danger" %>
       <input class="btn btn-danger" id="pnt" type="button" value="　印　刷　">
       <input class="btn btn-danger" id="cls" type="button" value="　閉じる　" onClick="window.close()">
     </div>
